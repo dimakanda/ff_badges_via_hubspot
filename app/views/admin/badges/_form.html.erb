@@ -5,7 +5,7 @@
     <%= f.input :message %>
     <%= f.input :badge_type %>
     <%= f.input :points, as: :integer, input_html: {class: 'span1'}  %>
-    <%= f.input :icon, as: :file %>
+    <%= f.input :icon, as: :image_preview, input_html: {preview_version: :medium} %>
   </div>
 
   <div class="form-actions">
