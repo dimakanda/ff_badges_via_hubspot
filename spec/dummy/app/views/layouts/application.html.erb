@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dummy</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="flash_container">
+  <% if alert %>
+    <div class="alert alert-error"><%= alert %></div>
+  <% elsif notice %>
+    <div class="alert alert-success"><%= notice %></div>
+  <% end %>
+</div>
+<%= yield %>
+
+</body>
+</html>

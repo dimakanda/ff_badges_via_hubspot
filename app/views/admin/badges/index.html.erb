@@ -1,0 +1,36 @@
+<h1>Listing badges</h1>
+
+<% if @badges.present? %>
+  <table id="badges_list" class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Message</th>
+        <th>Badge type</th>
+        <th>Points</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @badges.each do |badge| %>
+        <tr id="badge_<%= badge.id -%>">
+          <td><%= image_tag badge.icon.url(:thumb) %></td>
+          <td><%= link_to badge.name, [:admin, badge] %></td>
+          <td><%= truncate badge.description %></td>
+          <td><%= badge.message %></td>
+          <td><%= badge.badge_type %></td>
+          <td><%= badge.points %></td>
+          <td><%= link_to 'Edit', [:edit, :admin, badge], class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Destroy', [:admin, badge], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+<%= link_to 'New Badge', new_admin_badge_path %>

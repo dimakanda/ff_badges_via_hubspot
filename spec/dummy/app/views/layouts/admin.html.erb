@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FF Badges Admin</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="<%= controller.controller_name %>_<%= controller.action_name %>">
+
+  <div id="main-app-navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+
+        <div class="nav-collapse">
+					<ul class="nav pull-left" id="admin_main_nav">
+						<li id="admin_root_li"><%= link_to "Admin Dash", admin_root_path, id: 'admin_root_link' %></li>
+            <li id="admin_badges_li"><%= link_to "Badges", admin_badges_path, id: 'admin_badges_link' %></li>
+					</ul>
+
+					<ul class="nav pull-right">
+					  <% if current_user %>
+              <li id="logout_li"><%= link_to "Logout", logout_path, id: 'logout_link' %></li>
+         	  <% else %>
+               <li id="login_li"><%= link_to "Log In", login_path, id: 'login_link' %></li>
+         	  <% end %>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+	  <div id="flash_container">
+      <% if alert %>
+        <div class="alert alert-error"><%= alert %></div>
+      <% elsif notice %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% end %>
+    </div>
+		<%= yield %>
+	</div>
+
+</body>
+</html>

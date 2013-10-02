@@ -1,0 +1,36 @@
+<h1>Badge</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @badge.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @badge.description %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @badge.message %>
+</p>
+
+
+<p>
+  <strong>Badge type:</strong>
+  <%= @badge.badge_type %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @badge.points %>
+</p>
+
+<p>
+  <%= image_tag @badge.icon.url(:big) %>
+  <%= image_tag @badge.icon.url(:medium) %>
+  <%= image_tag @badge.icon.url(:thumb) %>
+</p>
+
+<%= link_to 'Edit', [:edit, :admin, @badge] %> |
+<%= link_to 'Back', admin_badges_path %>

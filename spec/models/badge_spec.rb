@@ -1,0 +1,13 @@
+require 'spec_helper'
+
+describe Badge do
+
+  it { should have_many(:users).through(:user_badges) }
+
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:message) }
+  it { should validate_presence_of(:icon) }
+  it { should have_attached_file(:icon) }
+  it { should validate_numericality_of(:points).only_integer }
+
+end
