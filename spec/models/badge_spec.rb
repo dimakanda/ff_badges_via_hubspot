@@ -7,6 +7,7 @@ describe Badge do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:message) }
   it { should validate_presence_of(:icon) }
+  it { should validate_presence_of(:points) }
   it { should have_attached_file(:icon) }
   it { should validate_numericality_of(:points).only_integer }
 
