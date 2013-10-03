@@ -8,8 +8,9 @@
         <th>Name</th>
         <th>Description</th>
         <th>Message</th>
-        <th>Badge type</th>
+        <th>Filename</th>
         <th>Points</th>
+        <th>Status</th>
         <th></th>
         <th></th>
       </tr>
@@ -22,8 +23,20 @@
           <td><%= link_to badge.name, [:admin, badge] %></td>
           <td><%= truncate badge.description %></td>
           <td><%= badge.message %></td>
-          <td><%= badge.badge_type %></td>
+          <td><%= badge.filename %>.rb</td>
           <td><%= badge.points %></td>
+          <td>
+            <% if User.badge_defined? badge.filename -%>
+              <%= content_tag :span, 'defined', class: "label label-info" %>
+              <% if User.badge_activated? badge.filename %>
+                <%= content_tag :span, 'activated', class: "label label-success" %>
+              <% else %>
+                <%= content_tag :span, 'not activated', class: "label label-warning" %>
+              <% end %>
+            <% else %>
+              <%= content_tag :span, 'not defined', class: "label label-warning" %>
+            <% end %>
+          </td>
           <td><%= link_to 'Edit', [:edit, :admin, badge], class: 'btn btn-primary' %></td>
           <td><%= link_to 'Destroy', [:admin, badge], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
         </tr>

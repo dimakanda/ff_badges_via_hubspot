@@ -4,7 +4,7 @@ class CreateBadges < ActiveRecord::Migration
       t.string :name, null: false
       t.text :description
       t.text :message
-      t.string :badge_type
+      t.string :filename, null: false
       t.integer :points, unsigned: true
       t.attachment :icon
 

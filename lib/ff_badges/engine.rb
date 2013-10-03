@@ -19,5 +19,7 @@ module FfBadges
       g.helper false
     end
 
+    #config.autoload_paths << File.expand_path("../lib/concerns/models", __FILE__)
+
   end
 end

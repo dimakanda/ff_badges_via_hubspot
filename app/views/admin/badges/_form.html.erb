@@ -3,7 +3,7 @@
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :message %>
-    <%= f.input :badge_type %>
+    <%= f.input :filename, hint: 'Filename where earning badge condition will be defined. Without .rb extension.' %>
     <%= f.input :points, as: :integer, input_html: {class: 'span1'}  %>
     <%= f.input :icon, as: :image_preview, input_html: {preview_version: :medium} %>
   </div>

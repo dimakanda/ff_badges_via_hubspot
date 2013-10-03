@@ -19,7 +19,10 @@ class Admin::BadgesController < Admin::AdminController
     @badge = Badge.new(badge_params)
 
     if @badge.save
-      redirect_to [:admin, @badge], notice: 'Badge was successfully created.'
+      redirect_to [:admin, @badge], 
+        notice: "Badge was successfully created. 
+          Define badge conditions in #{Rails.application.class.parent_name}/app/models/concerns/ff_badges/#{@badge.filename}.rb 
+          and activate it in #{Rails.application.class.parent_name}/app/models/user.rb."
     else
       render action: 'new'
     end
@@ -27,7 +30,9 @@ class Admin::BadgesController < Admin::AdminController
 
   def update
     if @badge.update(badge_params)
-      redirect_to [:admin, @badge], notice: 'Badge was successfully updated.'
+      redirect_to [:admin, @badge], 
+        notice: "Badge was successfully updated. 
+          Define badge conditions in #{Rails.application.class.parent_name}/app/models/concerns/ff_badges/#{@badge.filename}.rb."
     else
       render action: 'edit'
     end
@@ -35,7 +40,8 @@ class Admin::BadgesController < Admin::AdminController
 
   def destroy
     @badge.destroy
-    redirect_to admin_badges_url, notice: 'Badge was successfully destroyed.'
+    redirect_to admin_badges_url, notice: "Badge was successfully destroyed. 
+      Deactivate it in #{Rails.application.class.parent_name}/app/models/user.rb"
   end
 
   private
@@ -45,6 +51,6 @@ class Admin::BadgesController < Admin::AdminController
     end
 
     def badge_params
-      params.require(:badge).permit(:name, :description, :message, :badge_type, :points, :icon)
+      params.require(:badge).permit(:name, :description, :message, :filename, :points, :icon)
     end
 end
