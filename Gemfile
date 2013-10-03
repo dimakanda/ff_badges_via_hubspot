@@ -15,5 +15,5 @@ gemspec
 
 gem 'sorcery'
 gem 'paperclip'
-gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
+gem 'simple_form'
 gem 'shoulda-matchers'

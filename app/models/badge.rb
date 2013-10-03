@@ -13,4 +13,6 @@ class Badge < ActiveRecord::Base
 
   validates :filename, :name, uniqueness: true
 
+  attr_accessible :name, :description, :message, :filename, :points, :icon
+
 end

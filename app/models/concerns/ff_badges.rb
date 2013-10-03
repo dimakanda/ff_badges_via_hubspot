@@ -20,7 +20,7 @@ module Concerns::FfBadges
           end
 
         rescue
-          logger.error "ERROR: Create FfBadges::#{badge_name.to_s.camelcase} module in app/models/concerns/ff_badges/#{badge_name}.rb file."
+          logger.error "ERROR: Create FfBadges::#{badge_name.to_s.camelcase} module in #{Rails.application.class.parent_name}/app/models/concerns/ff_badges/#{badge_name}.rb file."
         end
       end
     end
@@ -53,7 +53,7 @@ module Concerns::FfBadges
       begin
         "FfBadges::#{name.to_s.camelcase}".constantize
         true
-      rescue 
+      rescue
         false
       end
     end

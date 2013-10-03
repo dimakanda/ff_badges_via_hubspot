@@ -19,7 +19,15 @@ module FfBadges
       g.helper false
     end
 
-    #config.autoload_paths << File.expand_path("../lib/concerns/models", __FILE__)
+    config.to_prepare do
+      Dir.glob(Rails.root + "app/models/concerns/ff_badges/*.rb").each do |c|
+        require_dependency(c)
+      end
+
+      Dir.glob(FfBadges::Engine.root + "/app/models/concerns/ff_badges/*.rb").each do |c|
+        require_dependency(c)
+      end
+    end
 
   end
 end
