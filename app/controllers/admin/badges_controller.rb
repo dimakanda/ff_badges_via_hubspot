@@ -3,6 +3,8 @@ class Admin::BadgesController < Admin::AdminController
 
   def index
     @badges = Badge.all
+    @activated_badges = User.activated_badges
+    @not_configured_badges = @activated_badges - @badges.collect(&:filename).map(&:to_sym)
   end
 
   def show

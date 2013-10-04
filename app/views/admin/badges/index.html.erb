@@ -1,5 +1,11 @@
 <h1>Listing badges</h1>
 
+<% if @not_configured_badges.present? %>
+  <%= render 'shared/flash', alert: "Following badges have been defined and activated but not configured:<br />
+    #{@not_configured_badges.collect {|b| b.to_s.camelcase }.join(", ")}".html_safe %>
+  
+<% end %>
+
 <% if @badges.present? %>
   <table id="badges_list" class="table table-condensed table-striped">
     <thead>
