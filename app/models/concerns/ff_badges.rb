@@ -39,8 +39,10 @@ module Concerns::FfBadges
     self.badges << badge if !has_badge?(badge) && deserves_badge?(badge)
   end
 
-  def lost_badge!(badge)
-    self.badges.where(badge_id: badge.id).destroy if has_badge?(badge)
+  def remove_badge!(badge)
+    if self.has_badge?(badge)
+      self.user_badges.where(badge_id: badge.id).first.destroy
+    end
   end
 
   def has_badge?(badge)

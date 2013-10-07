@@ -20,6 +20,12 @@ module FfBadges
     end
 
     config.to_prepare do
+      # Dir.glob(Rails.root + "app/observers/ff_badges/*.rb").each do |c|
+      #   if User.badge_defined?(c)
+      #     require_dependency(c)
+      #   end
+      # end
+
       Dir.glob(Rails.root + "app/models/concerns/ff_badges/*.rb").each do |c|
         require_dependency(c)
       end
@@ -28,6 +34,13 @@ module FfBadges
         require_dependency(c)
       end
     end
+
+    #config.active_record.observers += :versioner_observer
+
+    #initializer :add_observers_directory do |app|
+      #config.autoload_paths += %W(#{app.root.to_s}/observers/ff_badges)
+      #app.config.active_record.observers << :versioner_observer
+    #end
 
   end
 end
