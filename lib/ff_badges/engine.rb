@@ -35,6 +35,10 @@ module FfBadges
       end
     end
 
+    initializer :config_redis do
+      $redis = Redis.new(host: 'localhost', port: 6379)
+    end
+
     #config.active_record.observers += :versioner_observer
 
     #initializer :add_observers_directory do |app|
