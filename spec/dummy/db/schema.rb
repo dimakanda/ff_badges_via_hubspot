@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130925132107) do
     t.string   "name",              :null => false
     t.text     "description"
     t.text     "message"
+    t.string   "filename",          :null => false
     t.string   "badge_type"
     t.integer  "points"
     t.string   "icon_file_name"
