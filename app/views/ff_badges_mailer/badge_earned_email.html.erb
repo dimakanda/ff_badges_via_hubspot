@@ -1,7 +1,7 @@
 <h1>Congratulations, you have earned <%= @badge.name -%> badge!</h1>
 
 <p>
-  <%= image_tag asset_path(@badge.icon.url(:medium)) %>
+  <%= image_tag @badge.icon.url(:medium) %>
   <%= @badge.message %>
 </p>
 
