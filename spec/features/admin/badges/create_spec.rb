@@ -13,6 +13,7 @@ describe 'Create Badge' do
   end
 
   it 'should create new badge' do
+
     within "#admin_main_nav" do
       click_link 'Badges'
     end
@@ -22,6 +23,7 @@ describe 'Create Badge' do
     fill_in 'Name', with: 'Foo badge'
     fill_in 'Description', with: 'Badge Description'
     fill_in 'Message', with: 'Badge Message'
+    fill_in 'Filename', with: 'foo_badge'
     fill_in 'Points', with: 10
     attach_file 'Icon', File.join(Rails.root, '../', 'fixtures', 'picture.png')
 

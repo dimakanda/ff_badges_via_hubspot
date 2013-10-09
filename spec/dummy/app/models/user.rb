@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
 
   authenticates_with_sorcery!
 
-  has_many :user_badges
-  has_many :badges, through: :user_badges
+  include Concerns::FfBadges::User
+  badges :forgetful
 
   def send_activation_needed_email!
     super unless skip_activation_email

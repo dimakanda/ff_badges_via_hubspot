@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module Concerns::FfBadges
+module Concerns::FfBadges::User
   extend ActiveSupport::Concern
 
   included do

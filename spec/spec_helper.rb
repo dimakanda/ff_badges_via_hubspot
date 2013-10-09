@@ -1,10 +1,13 @@
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require File.expand_path("../dummy/config/environment.rb",  __FILE__) # let the spec know about dummy app
+
 require 'rspec/rails'
+
 require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'sorcery'
 require 'paperclip/matchers'
+require 'shoulda/matchers/integrations/rspec'
 
 require 'capybara/rails'
 require 'capybara/rspec'

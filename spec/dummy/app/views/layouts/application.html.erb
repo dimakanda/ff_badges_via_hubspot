@@ -8,14 +8,8 @@
 </head>
 <body>
 
-<div id="flash_container">
-  <% if alert %>
-    <div class="alert alert-error"><%= alert %></div>
-  <% elsif notice %>
-    <div class="alert alert-success"><%= notice %></div>
-  <% end %>
-</div>
-<%= yield %>
+  <%= render partial: 'shared/flash' %>
+  <%= yield %>
 
 </body>
 </html>

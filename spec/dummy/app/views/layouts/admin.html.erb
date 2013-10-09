@@ -35,13 +35,7 @@
     </div>
   </div>
   <div class="container">
-	  <div id="flash_container">
-      <% if alert %>
-        <div class="alert alert-error"><%= alert %></div>
-      <% elsif notice %>
-        <div class="alert alert-success"><%= notice %></div>
-      <% end %>
-    </div>
+	  <%= render partial: 'shared/flash' %>
 		<%= yield %>
 	</div>
 
