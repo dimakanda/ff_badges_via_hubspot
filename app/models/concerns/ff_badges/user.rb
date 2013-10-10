@@ -48,6 +48,12 @@ module Concerns::FfBadges::User
   def has_badge?(badge)
     self.badges.include?(badge)
   end
+
+  def check_and_earn_all_badges!
+    self.activated_badges.each do |badge|
+      self.earn_badge!(badge)
+    end
+  end
  
   module ClassMethods
 
