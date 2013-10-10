@@ -1,0 +1,13 @@
+class <%= name %>Observer < ActiveRecord::Observer
+
+  observe :essay # TODO: set propper model to observe
+  
+  # TODO: set propper conditions here
+  def after_update(essay)
+    user = essay.user
+
+    badge = Badge.where(name: '<%= name -%>').first
+    user.earn_badge!(badge) if user.deserves_badge?(badge)
+  end
+
+end
