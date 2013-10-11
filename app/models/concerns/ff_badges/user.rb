@@ -50,8 +50,8 @@ module Concerns::FfBadges::User
   end
 
   def check_and_earn_all_badges!
-    self.activated_badges.each do |badge|
-      self.earn_badge!(badge)
+    User.activated_badges.each do |badge_name|
+      self.earn_badge! Badge.where(name: badge_name).first
     end
   end
  
