@@ -46,7 +46,7 @@ module Concerns::FfBadges::User
   end
 
   def has_badge?(badge)
-    self.badges.include?(badge)
+    self.user_badges.where(badge_id: badge.id).first.present?
   end
 
   def check_and_earn_all_badges!

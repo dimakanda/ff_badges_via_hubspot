@@ -12,6 +12,24 @@ module FfBadges
       end
     end
 
+    initializer :add_callbacks_and_observers do |app|
+      User.activated_badges.each do |badge_name|
+        module_name = "FfBadges::#{badge_name.to_s.camelcase}"
+
+        User.send :include, "#{module_name}::UserConditions".constantize
+        #to_include = "#{module_name}::UserConditions".split('::').inject(Object) {|o,c| o.const_get c}
+        #User.send :include, to_include
+
+        #require Rails.root + "app/observers/ff_badges/#{badge_name}_observer.rb"
+
+        #app.config.active_record.observers << "FfBadges::#{badge_name.to_s.camelcase}Observer"
+      end
+    end
+
+    initializer :config_redis do
+      $redis = Redis.new(host: 'localhost', port: 6379)
+    end
+
     config.generators do |g|
       g.test_framework :rspec, fixture: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
@@ -27,25 +45,15 @@ module FfBadges
       #   end
       # end
 
-      Dir.glob(Rails.root + "app/models/concerns/ff_badges/*.rb").each do |c|
-        require_dependency(c)
-      end
+      # Dir.glob(Rails.root + "app/models/concerns/ff_badges/*.rb").each do |c|
+      #   require_dependency(c)
+      # end
 
-      Dir.glob(FfBadges::Engine.root + "/app/models/concerns/ff_badges/*.rb").each do |c|
-        require_dependency(c)
-      end
+      # FIXME it doesnt work
+      # Dir.glob(FfBadges::Engine.root + "/app/models/concerns/ff_badges/*.rb").each do |c|
+      #   require_dependency(c)
+      # end
     end
-
-    initializer :config_redis do
-      $redis = Redis.new(host: 'localhost', port: 6379)
-    end
-
-    #config.active_record.observers += :versioner_observer
-
-    #initializer :add_observers_directory do |app|
-      #config.autoload_paths += %W(#{app.root.to_s}/observers/ff_badges)
-      #app.config.active_record.observers << :versioner_observer
-    #end
 
   end
 end

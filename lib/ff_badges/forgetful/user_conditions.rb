@@ -1,4 +1,4 @@
-module Concerns::FfBadges::Forgetful
+module FfBadges::Forgetful::UserConditions
 
 	extend ActiveSupport::Concern
 
