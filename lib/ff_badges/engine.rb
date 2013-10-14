@@ -12,7 +12,7 @@ module FfBadges
       end
     end
 
-    initializer :add_callbacks_and_observers do |app|
+    initializer :add_callbacks do
       User.activated_badges.each do |badge_name|
         module_name = "FfBadges::#{badge_name.to_s.camelcase}"
 
