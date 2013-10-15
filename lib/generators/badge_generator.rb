@@ -12,10 +12,15 @@ class BadgeGenerator < ActiveRecord::Generators::Base
   def create_badge_files
     template "badge.rb.erb", "extras/ff_badges/#{badge_filename}/user_conditions.rb"
     template "observer.rb.erb", "app/observers/#{badge_filename}_observer.rb"
+    template "feature_spec.rb.erb", "spec/requests/badges/#{badge_filename}_spec.rb"
   end
 
   def show_message
     puts "\nAdd badge to User model: \n\n\s\sbadges :#{badge_filename}\n\n"
+    puts "Add following code to spec/factories.rb:\n
+  factory :#{badge_filename}_badge, parent: :badge do
+    name '#{name}'
+    filename '#{badge_filename}'\n\n"
   end
 
   protected
