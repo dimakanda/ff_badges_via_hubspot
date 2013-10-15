@@ -12,15 +12,15 @@ module Concerns::FfBadges::User
 
       @@ff_badges_activated.each do |badge_name|
         begin
-          module_name = "FfBadges::#{badge_name.to_s.camelcase}"
+          module_name = "FfBadges::#{badge_name.to_s.camelcase}::UserConditions"
           include module_name.constantize
 
           unless module_name.constantize.method_defined? "deserves_#{badge_name}_badge?".to_sym
-            logger.error "ERROR: Define deserves_#{badge_name}_badge? method in FfBadges::#{badge_name.to_s.camelcase}."
+            logger.error "ERROR: Define deserves_#{badge_name}_badge? method in #{module_name}"
           end
 
         rescue
-          logger.error "ERROR: Create FfBadges::#{badge_name.to_s.camelcase} module in #{Rails.application.class.parent_name}/app/models/concerns/ff_badges/#{badge_name}.rb file."
+          logger.error "ERROR: Create module #{module_name} in #{Rails.application.class.parent_name}/extras/ff_badges/#{badge_name}/user_conditions.rb file."
         end
       end
     end
