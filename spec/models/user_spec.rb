@@ -104,7 +104,7 @@ describe User do
 
       it 'should return true or false' do
         expect(@user.has_badge?(@foobist)).to be_true
-        expect(@user.has_badge?(@baarist)).to be_false
+        expect(@user.has_badge?(@barist)).to be_false
       end
     end
 

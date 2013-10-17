@@ -4,8 +4,8 @@
     <h3 id="myModalLabel">Congratulations! You have earned badge.</h3>
   </div>
   <div class="modal-body">
-    <h4><%= @ff_badge.name %></h4>
-    <p><%= image_tag @ff_badge.icon.url(:big) %><%= @ff_badge.message %></p>
+    <h4><%= badge.name %></h4>
+    <p><%= image_tag badge.icon.url(:big) %><%= badge.message %></p>
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Ok</button>

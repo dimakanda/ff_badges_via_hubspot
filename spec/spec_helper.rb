@@ -40,3 +40,7 @@ RSpec.configure do |config|
   end
 
 end
+
+# hack for Socery, reload User model
+Object.send(:remove_const, 'User')
+load 'user.rb'
