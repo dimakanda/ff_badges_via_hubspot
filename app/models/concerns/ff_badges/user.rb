@@ -12,7 +12,7 @@ module Concerns::FfBadges::User
 
       @@ff_badges_activated.each do |badge_name|
         begin
-          module_name = "FfBadges::#{badge_name.to_s.camelcase}::UserConditions"
+          module_name = "FfBadges::Badges::#{badge_name.to_s.camelcase}"
           include module_name.constantize
 
           unless module_name.constantize.method_defined? "deserves_#{badge_name}_badge?".to_sym
@@ -20,7 +20,7 @@ module Concerns::FfBadges::User
           end
 
         rescue
-          logger.error "ERROR: Create module #{module_name} in #{Rails.application.class.parent_name}/extras/ff_badges/#{badge_name}/user_conditions.rb file."
+          logger.error "ERROR: Create module #{module_name} in #{Rails.application.class.parent_name}/extras/ff_badges/badges/#{badge_name}.rb file."
         end
       end
     end
@@ -59,7 +59,7 @@ module Concerns::FfBadges::User
 
     def badge_defined?(name)
       begin
-        "FfBadges::#{name.to_s.camelcase}".constantize
+        "FfBadges::Badges::#{name.to_s.camelcase}".constantize
         true
       rescue
         false
