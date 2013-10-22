@@ -1,0 +1,2 @@
+module FfBadges::Observers
+end
