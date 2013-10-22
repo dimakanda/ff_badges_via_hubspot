@@ -1,9 +1,7 @@
-module FfBadges::<%= name %>
-
-  extend ActiveSupport::Concern
+module FfBadges::Badges::<%= name %>
 
   def deserves_<%= badge_filename -%>_badge?
-    # TODO: conditons for earning badge here 
+    # TODO: conditions for earning badge here 
     # it should return true/false only
   end
 
