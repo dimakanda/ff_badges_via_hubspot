@@ -4,7 +4,7 @@ describe '<%= name %> Badge' do
   let(:user) { create :user }
   let!(:badge) { create :<%= badge_filename %>_badge }
 
-  it 'should give user the <%= name %> badge', observer: :<%= badge_filename %>_observer do
+  it 'should give user the <%= name %> badge', observer: "FfBadges::Observers::<%= name -%>Observer" do
     
     # TODO put a code which should trigger earning badge here
 
