@@ -11,7 +11,7 @@ class BadgeGenerator < ActiveRecord::Generators::Base
 
   def create_badge_files
     template "badge.rb.erb", "extras/ff_badges/badges/#{badge_filename}.rb"
-    template "observer.rb.erb", "app/observers/#{badge_filename}_observer.rb"
+    template "observer.rb.erb", "extras/ff_badges/observers/#{badge_filename}_observer.rb"
     template "feature_spec.rb.erb", "spec/requests/badges/#{badge_filename}_spec.rb"
   end
 
