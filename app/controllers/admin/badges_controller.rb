@@ -23,8 +23,8 @@ class Admin::BadgesController < Admin::AdminController
     if @badge.save
       redirect_to [:admin, @badge], 
         notice: "Badge was successfully created.<br />
-          Define badge conditions in <strong>#{Rails.application.class.parent_name}/app/models/concerns/ff_badges/#{@badge.filename}.rb</strong><br />
-          and activate it in <strong>#{Rails.application.class.parent_name}/app/models/user.rb</strong>.".html_safe
+          Define badge conditions in <strong>/extras/ff_badges/#{@badge.filename}.rb</strong><br />
+          and activate it in <strong>/app/models/user.rb</strong>.".html_safe
     else
       render action: 'new'
     end
@@ -34,7 +34,7 @@ class Admin::BadgesController < Admin::AdminController
     if @badge.update_attributes(params[:badge])
       redirect_to [:admin, @badge], 
         notice: "Badge was successfully updated.<br />
-          Define badge conditions in <strong>#{Rails.application.class.parent_name}/app/models/concerns/ff_badges/#{@badge.filename}.rb</strong>.".html_safe
+          Define badge conditions in <strong>/extras/ff_badges/#{@badge.filename}.rb</strong>.".html_safe
     else
       render action: 'edit'
     end
@@ -43,7 +43,7 @@ class Admin::BadgesController < Admin::AdminController
   def destroy
     @badge.destroy
     redirect_to admin_badges_url, notice: "Badge was successfully destroyed.<br />
-      Deactivate it in <strong>#{Rails.application.class.parent_name}/app/models/user.rb</strong>.".html_safe
+      Deactivate it in <strong>/app/models/user.rb</strong>.".html_safe
   end
 
   private
