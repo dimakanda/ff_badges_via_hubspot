@@ -40,7 +40,7 @@ module Concerns::FfBadges::User
   end
 
   def remove_badge!(badge)
-    if self.has_badge?(badge)
+    if self.has_badge?(badge) && badge.invertable?
       self.user_badges.where(badge_id: badge.id).first.destroy
     end
   end

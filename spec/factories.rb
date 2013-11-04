@@ -19,6 +19,7 @@ FactoryGirl.define do
     sequence(:message) {|n| "BadgeDescription#{n}" }
     sequence(:filename) {|n| "badge_filename_#{n}" }
     points 10
+    invertable false
     #icon { fixture_file_upload(File.join(Rails.root, '../', 'fixtures', 'picture.png')) }
     icon_file_name { 'badge.jpg' }
     icon_content_type { 'image/jpeg' }

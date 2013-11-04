@@ -1,6 +1,4 @@
-module FfBadges::Foobist
-
-	extend ActiveSupport::Concern
+module FfBadges::Badges::Foobist
 
 	def deserves_foobist_badge?
 		self.name.include? 'Foo'

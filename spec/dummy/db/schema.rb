@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925132107) do
+ActiveRecord::Schema.define(:version => 20131030162157) do
 
   create_table "activities", :force => true do |t|
     t.datetime "created_at"
@@ -31,12 +31,13 @@ ActiveRecord::Schema.define(:version => 20130925132107) do
   end
 
   create_table "badges", :force => true do |t|
-    t.string   "name",              :null => false
+    t.string   "name",                                 :null => false
     t.text     "description"
     t.text     "message"
-    t.string   "filename",          :null => false
+    t.string   "filename",                             :null => false
     t.string   "badge_type"
     t.integer  "points"
+    t.boolean  "invertable",        :default => false
     t.string   "icon_file_name"
     t.string   "icon_content_type"
     t.integer  "icon_file_size"

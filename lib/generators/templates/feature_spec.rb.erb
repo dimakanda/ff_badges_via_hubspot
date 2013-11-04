@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe '<%= name %> Badge' do
-  let(:user) { create :user }
-  let!(:badge) { create :<%= badge_filename %>_badge }
+describe '<%= name %> Badge', observer: 'FfBadges::Observers::<%= name -%>Observer' do
+  let!(:user) { create :user }
+  let!(:badge) { create :<%= badge_filename %>_badge<%= invertable ? ', invertable: true' : '' -%>}
 
-  it 'should give user the <%= name %> badge', observer: "FfBadges::Observers::<%= name -%>Observer" do
+  it 'should give user the <%= name %> badge' do
     
     # TODO put a code which should trigger earning badge here
 
@@ -13,5 +13,9 @@ describe '<%= name %> Badge' do
       expect(page).to have_content badge.message
     end
   end
-
+  <% if invertable %>
+  it 'should remove user <%= name %> badge' do
+    # TODO put a code which should trigger remove badge here
+  end
+  <% end %>
 end

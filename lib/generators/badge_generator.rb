@@ -4,6 +4,7 @@ class BadgeGenerator < ActiveRecord::Generators::Base
   desc "Create badge definition and observer files."
 
   argument :name, required: true, desc: 'Badge Name', banner: 'Name'
+  argument :invertable, type: :string, default: false, desc: 'Badge is invertable?', banner: 'invertable'
 
   def self.source_root
     @source_root ||= File.expand_path('../templates', __FILE__)

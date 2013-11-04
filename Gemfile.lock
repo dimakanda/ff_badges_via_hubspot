@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ff_badges (0.0.1)
+    ff_badges (1.0.0)
       rails (~> 3.2)
       redis
       simple_form

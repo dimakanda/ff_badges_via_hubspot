@@ -1,9 +1,9 @@
-<h1>Listing badges</h1>
+<%= link_to 'New Badge', new_admin_badge_path, class: 'btn btn-success pull-right' %>
+<h1 class="page-header">Listing badges</h1>
 
 <% if @not_configured_badges.present? %>
   <%= render 'shared/flash', alert: "Following badges have been defined and activated but not configured:<br />
     #{@not_configured_badges.collect {|b| b.to_s.camelcase }.join(", ")}".html_safe %>
-  
 <% end %>
 
 <% if @badges.present? %>
@@ -25,7 +25,7 @@
     <tbody>
       <% @badges.each do |badge| %>
         <tr id="badge_<%= badge.id -%>">
-          <td><%= image_tag badge.icon.url(:thumb) %></td>
+          <td><%= link_to image_tag(badge.icon.url(:thumb)), [:admin, badge] %></td>
           <td><%= link_to badge.name, [:admin, badge] %></td>
           <td><%= truncate badge.description %></td>
           <td><%= badge.message %></td>
@@ -52,4 +52,3 @@
 
 <% end %>
 
-<%= link_to 'New Badge', new_admin_badge_path %>

@@ -10,9 +10,10 @@ class Badge < ActiveRecord::Base
 	validates_attachment :icon,
     content_type: { content_type: ['image/gif', 'image/png', 'image/x-png', 'image/jpeg', 'image/pjpeg', 'image/jpg']},
     size: { in: 0..5.megabytes }
+  validates :invertable, inclusion: {in: [true, false]}
 
   validates_uniqueness_of :filename, :name
 
-  attr_accessible :name, :description, :message, :filename, :points, :icon
+  attr_accessible :name, :description, :message, :filename, :points, :icon, :invertable
 
 end

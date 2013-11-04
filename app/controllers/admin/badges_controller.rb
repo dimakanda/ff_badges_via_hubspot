@@ -23,7 +23,7 @@ class Admin::BadgesController < Admin::AdminController
     if @badge.save
       redirect_to [:admin, @badge], 
         notice: "Badge was successfully created.<br />
-          Define badge conditions in <strong>/extras/ff_badges/#{@badge.filename}.rb</strong><br />
+          Define badge conditions in <strong>/extras/ff_badges/badges/#{@badge.filename}.rb</strong><br />
           and activate it in <strong>/app/models/user.rb</strong>.".html_safe
     else
       render action: 'new'
@@ -34,7 +34,7 @@ class Admin::BadgesController < Admin::AdminController
     if @badge.update_attributes(params[:badge])
       redirect_to [:admin, @badge], 
         notice: "Badge was successfully updated.<br />
-          Define badge conditions in <strong>/extras/ff_badges/#{@badge.filename}.rb</strong>.".html_safe
+          Define badge conditions in <strong>/extras/ff_badges/badges/#{@badge.filename}.rb</strong>.".html_safe
     else
       render action: 'edit'
     end

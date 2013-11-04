@@ -14,9 +14,10 @@ describe User do
 
       expect(User.activated_badges).to match_array [:foobist, :barist]
 
-      # reload User class
-      Object.send(:remove_const, 'User') 
-      load 'user.rb'
+      # set back default badge
+      User.class_eval do
+        badges :forgetful
+      end
     end
 
     describe 'activated_badges' do
@@ -50,17 +51,13 @@ describe User do
   describe 'Instance methods' do
     before :all do
       User.class_eval do
-
-        include FfBadges::Foobist
-        include FfBadges::Barist
-
         badges :foobist, :barist
       end
     end
 
     before do
-      @foobist = create :badge, name: 'Foobist', filename: 'foobist'
-      @barist = create :badge, name: 'Barist', filename: 'barist'
+      @foobist = create :badge, name: 'Foobist', filename: 'foobist', invertable: true
+      @barist = create :badge, name: 'Barist', filename: 'barist', invertable: false
       @user = create :user, name: 'John McFoo'
     end
 
@@ -91,9 +88,14 @@ describe User do
         @user.earn_badge! @foobist
       end
 
-      it 'should remove badge from user badges' do
+      it 'should remove invertable badge from user badges' do
         @user.remove_badge! @foobist
         expect(@user.badges.reload).not_to include(@foobist)
+      end
+
+      it 'should not remove badge when its not invertable' do
+        @user.remove_badge! @barist
+        expect(@user.badges.reload).to include(@foobist)
       end
     end
 

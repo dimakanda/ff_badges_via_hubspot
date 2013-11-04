@@ -25,6 +25,7 @@ describe 'Create Badge' do
     fill_in 'Message', with: 'Badge Message'
     fill_in 'Filename', with: 'foo_badge'
     fill_in 'Points', with: 10
+    check 'User losts the badge when he stops fullfiling conditions.'
     attach_file 'Icon', File.join(Rails.root, '../', 'fixtures', 'picture.png')
 
     click_button 'Create Badge'
