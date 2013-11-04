@@ -46,6 +46,42 @@ describe User do
       end
     end
 
+    describe 'badgable_users_defined?' do
+      it 'should return false' do
+        expect(User.badgable_users_defined?).to be false
+      end
+
+      it 'should return true' do
+        User.instance_eval do
+          scope :badgable_users, lambda { where("users.email LIKE '%foo%' ")}
+        end
+
+        expect(User.badgable_users_defined?).to be true
+
+        class << User
+          remove_method :badgable_users
+        end
+      end
+    end
+
+    describe 'badgable_users' do
+      it 'should return only users selected by scope' do
+        user1 = create :user, email: 'foosky@bar.com'
+        user2 = create :user, email: 'fox@bar.com'
+        user3 = create :user, email: 'bar@foo.com'
+
+        User.instance_eval do
+          scope :badgable_users, lambda { where("users.email LIKE '%foo%' ")}
+        end
+
+        expect(User.badgable_users).to match_array [user1, user3]
+
+        class << User
+          remove_method :badgable_users
+        end
+      end
+    end
+
   end
 
   describe 'Instance methods' do
@@ -59,6 +95,34 @@ describe User do
       @foobist = create :badge, name: 'Foobist', filename: 'foobist', invertable: true
       @barist = create :badge, name: 'Barist', filename: 'barist', invertable: false
       @user = create :user, name: 'John McFoo'
+    end
+
+    describe 'badgable?' do
+      let!(:user1) { create :user, email: 'foosky@bar.com' }
+      let!(:user2) { create :user, email: 'fox@bar.com' }
+
+      context 'Badgable users not defined' do
+        it 'should return true' do
+          expect(user1.badgable?).to be true
+          expect(user2.badgable?).to be true
+        end
+      end
+
+      context 'Badgable users defined' do
+        it 'should return true only if user fulfill conditions' do
+          User.instance_eval do
+            scope :badgable_users, lambda { where("users.email LIKE '%foo%' ")}
+          end
+
+          expect(user1.badgable?).to be true
+          expect(user2.badgable?).to be false
+
+          class << User
+            remove_method :badgable_users
+          end
+        end
+      end
+
     end
 
     describe 'deserves_badge?' do

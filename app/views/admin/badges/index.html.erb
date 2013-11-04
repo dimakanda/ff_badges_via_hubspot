@@ -50,5 +50,18 @@
     </tbody>
   </table>
 
+  <% if User.badgable_users_defined? %>
+    <div id="badgable_users_info">
+      <h4>Badges are avaliable only for the following users:</h4>
+        <ul>
+        <% User.badgable_users.each do |user| %>
+          <li><%= user.name %> <%= user.email %></li>
+        <% end %>
+        </ul>
+      <br />
+      <small>Conditions are defined in User model with badgable_users scope.</small>
+    </div>
+  <% end %>
+
 <% end %>
 

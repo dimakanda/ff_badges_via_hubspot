@@ -32,29 +32,35 @@ module Concerns::FfBadges::User
   end
 
   def deserves_badge?(badge)
-    self.send "deserves_#{badge.filename}_badge?"
+    self.send "deserves_#{badge.filename}_badge?" if badgable?
   end
 
   def earn_badge!(badge)
-    self.badges << badge if !has_badge?(badge) && deserves_badge?(badge)
+    self.badges << badge if badgable? && !has_badge?(badge) && deserves_badge?(badge) 
   end
 
   def remove_badge!(badge)
-    if self.has_badge?(badge) && badge.invertable?
+    if badgable? && self.has_badge?(badge) && badge.invertable?
       self.user_badges.where(badge_id: badge.id).first.destroy
     end
   end
 
   def has_badge?(badge)
-    self.user_badges.where(badge_id: badge.id).first.present?
+    self.user_badges.where(badge_id: badge.id).first.present? if badgable?
   end
 
   def check_and_earn_all_badges!
-    User.activated_badges.each do |badge_name|
-      self.earn_badge! Badge.where(name: badge_name).first
+    if badgable?
+      User.activated_badges.each do |badge_name|
+        self.earn_badge! Badge.where(name: badge_name).first
+      end
     end
   end
- 
+
+  def badgable?
+    !self.class.badgable_users_defined? || self.class.badgable_users.include?(self)
+  end
+
   module ClassMethods
 
     def badge_defined?(name)
@@ -68,6 +74,10 @@ module Concerns::FfBadges::User
 
     def badge_activated?(name)
       self.activated_badges.include? name.to_sym
+    end
+
+    def badgable_users_defined?
+      self.methods.include? :badgable_users
     end
 
   end
