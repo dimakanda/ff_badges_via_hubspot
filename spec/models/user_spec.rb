@@ -14,10 +14,9 @@ describe User do
 
       expect(User.activated_badges).to match_array [:foobist, :barist]
 
-      # set back default badge
-      User.class_eval do
-        badges :forgetful
-      end
+      # reload User model
+      Object.send(:remove_const, 'User') 
+      load 'user.rb'
     end
 
     describe 'activated_badges' do

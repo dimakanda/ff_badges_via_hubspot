@@ -35,6 +35,19 @@ RSpec.configure do |config|
 
   config.include Paperclip::Shoulda::Matchers
 
+  config.before do
+    # disable all the observers
+    ActiveRecord::Base.observers.disable :all
+
+    # find out which observers this spec needs
+    observers = example.metadata[:observer] || example.metadata[:observers]
+
+    # turn on observers as needed
+    if observers
+      ActiveRecord::Base.observers.enable *observers
+    end
+  end
+
   config.before(:suite) do
     Capybara.javascript_driver = :rack_test
   end
