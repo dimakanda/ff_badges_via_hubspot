@@ -50,19 +50,17 @@ describe 'Badges Index' do
 
     expect(page).to have_content 'Following badges have been defined and activated but not configured: Foobist, Barist'
 
-    # reload User class
-    Object.send(:remove_const, 'User') 
-    load 'user.rb'
+    User.class_eval do
+      badges {}
+    end
   end
 
   it 'should show notice that badges are enabled only to selected users' do
-    User.class_eval do
-      scope :badgable_users, lambda { where("users.email LIKE '%@bar.com' ")}
-    end
-
     user1 = create :user, email: 'foosky@bar.com'
     user2 = create :user, email: 'barsky@bar.com'
     user3 = create :user, email: 'bar@foo.com'
+
+    User.stub(:badgable_users).and_return([user1, user2])
 
     click_link 'Badges'
 
@@ -72,10 +70,6 @@ describe 'Badges Index' do
       expect(page).to have_content 'barsky@bar.com'
       expect(page).not_to have_content 'bar@foo.com'
     end
-
-    # reload User class
-    Object.send(:remove_const, 'User') 
-    load 'user.rb'
   end
 
 end

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation
 
-  include Concerns::FfBadges::User
+  include FfBadges::UserConcern
   badges :forgetful
 
   # def send_activation_needed_email!
