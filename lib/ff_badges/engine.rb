@@ -15,7 +15,7 @@ module FfBadges
       $redis = Redis.new(host: 'localhost', port: 6379)
     end
 
-    # adds a methods like deservers_xxxxx_badge? to User model
+    # adds a methods like deservers_xxxxx_badge? tomodel User 
     initializer :add_methods_for_badge_conditions do
       User.activated_badges.each do |badge_name|
         module_name = "FfBadges::Badges"
@@ -25,7 +25,6 @@ module FfBadges
     end
 
     initializer :add_badges_observers do |app|
-
       # observers defined in gem
       observers = Dir.glob(root.to_s + "/lib/ff_badges/observers/*_observer.rb")
       # observers defined in app

@@ -1,6 +1,7 @@
 require "redis"
 
 require "ff_badges/engine"
+require "ff_badges/user_concern"
 require "ff_badges/badges"
 require "ff_badges/observers"
 
