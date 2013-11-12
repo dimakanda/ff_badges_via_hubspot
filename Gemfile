@@ -18,3 +18,8 @@ gem 'paperclip'
 gem 'simple_form'
 gem 'shoulda-matchers'
 gem 'redis'
+
+group :test do
+  gem "rspec"
+  gem "fakeredis", require: "fakeredis/rspec"
+end
