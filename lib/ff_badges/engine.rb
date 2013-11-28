@@ -5,7 +5,7 @@ module FfBadges
       $redis = Redis.new(host: 'localhost', port: 6379)
     end
 
-    # adds a methods like deservers_xxxxx_badge? tomodel User 
+    # adds a methods like deservers_xxxxx_badge? to User model
     initializer :add_methods_for_badge_conditions do
       User.activated_badges.each do |badge_name|
         module_name = "FfBadges::Badges"
@@ -24,7 +24,7 @@ module FfBadges
         file = File.basename(path)
         badge_filename = file.split('_observer.rb').first
 
-        if User.badge_activated?(badge_filename) && Badge.badge_configured?(badge_filename)
+        if User.badge_activated?(badge_filename) && (Rails.env.test? || Badge.badge_configured?(badge_filename))
           require_dependency(path)
           ActiveRecord::Base.observers += ["FfBadges::Observers::#{badge_filename.camelcase}Observer"]
         end
