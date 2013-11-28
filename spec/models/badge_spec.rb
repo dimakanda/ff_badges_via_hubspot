@@ -39,4 +39,17 @@ describe Badge do
     expect(badge3.errors[:filename]).to match_array ['has wrong format']
   end
 
+  describe 'Class Methods' do
+
+    describe 'badge_configured?' do
+      it 'should return true if badge record exists' do
+        badge = create :badge, filename: 'foobarist'
+
+        expect(Badge.badge_configured?('foobarist')).to eql true
+        expect(Badge.badge_configured?('foobarista')).to eql false
+      end
+    end
+    
+  end
+
 end

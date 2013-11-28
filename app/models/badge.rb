@@ -17,4 +17,8 @@ class Badge < ActiveRecord::Base
 
   attr_accessible :name, :description, :message, :filename, :points, :icon, :invertable
 
+  def self.badge_configured?(filename)
+    Badge.where(filename: filename).exists?
+  end
+
 end
