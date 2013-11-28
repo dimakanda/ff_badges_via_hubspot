@@ -6,6 +6,7 @@ class CreateBadges < ActiveRecord::Migration
       t.text :message
       t.string :filename, null: false
       t.integer :points, unsigned: true
+      t.boolean :invertable, default: false
       t.attachment :icon
 
       t.timestamps
