@@ -1,7 +1,7 @@
 <%= simple_form_for [:admin, @badge], html: {class: 'responsive', multipart: true} do |f| %>
   <div class="form-inputs">
     <%= f.input :name, input_html: {class: 'span6'} %>
-    <%= f.input :description, input_html: {class: 'span6', rows: 3}, hint: 'For internal use, user will not see it.' %>
+    <%= f.input :description, input_html: {class: 'span6', rows: 3} %>
     <%= f.input :message, input_html: {class: 'span6', rows: 3}, hint: 'User will see it when earn the badge.' %>
     <%= f.input :filename, placeholder: 'e.g: my_badge', hint: 'Filename with earning badge conditions. Without .rb extension.' %>
     <%= f.input :points, as: :integer, input_html: {class: 'span1'} %>
