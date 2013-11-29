@@ -24,7 +24,7 @@ module FfBadges
         file = File.basename(path)
         badge_filename = file.split('_observer.rb').first
 
-        if User.badge_activated?(badge_filename) && (Rails.env.test? || Badge.badge_configured?(badge_filename))
+        if User.badge_activated?(badge_filename)
           require_dependency(path)
           ActiveRecord::Base.observers += ["FfBadges::Observers::#{badge_filename.camelcase}Observer"]
         end

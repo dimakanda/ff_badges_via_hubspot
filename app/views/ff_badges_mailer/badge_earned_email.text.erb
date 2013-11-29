@@ -2,4 +2,6 @@ Congratulations, you have earned <%= @badge.name -%> badge!
 
 <%= @badge.message %>
 
-You have earned <%= pluralize @badge.points, 'point' -%>.
+<% if @badge.points %>
+  You have earned <%= pluralize @badge.points, 'point' -%>.
+<% end %>

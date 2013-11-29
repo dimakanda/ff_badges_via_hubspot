@@ -6,12 +6,11 @@ class FfBadges::Badges::<%= name %>Observer < ActiveRecord::Observer
   #def after_update(foo)
   #  user = foo.user
   #
-  #  badge = Badge.where(name: '<%= name -%>').first
-  #  user.earn_badge!(badge) if user.deserves_badge?(badge)
-  <% if invertable %>
-  # conditions for remove badge here
-  #  user.remove_badge!(badge)
-  <% end %>
+  #  if badge = Badge.where(name: '<%= name -%>').first
+  #   user.earn_badge!(badge) if user.deserves_badge?(badge)
+  #  <% if invertable %>conditions for remove badge here
+  #   user.remove_badge!(badge)<% end %>
+  #  end
   #end
 
 end

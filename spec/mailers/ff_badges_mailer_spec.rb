@@ -4,7 +4,7 @@ describe FfBadgesMailer do
 
   describe 'badge_earned_email' do
 
-    xit 'should contain correct contents' do
+    it 'should contain correct contents' do
       user = create :user
       badge = create :badge
 

@@ -1,10 +1,12 @@
 <h1>Congratulations, you have earned <%= @badge.name -%> badge!</h1>
 
 <p>
-  <%= image_tag @badge.icon.url(:medium) %>
+  <%= image_tag @badge.icon.url(:big) %>
   <%= @badge.message %>
 </p>
 
-<p>
-  You have earned <strong><%= pluralize @badge.points, 'point' -%></strong>.
-</p>
+<% if @badge.points %>
+  <p>
+    You have earned <strong><%= pluralize @badge.points, 'point' -%></strong>.
+  </p>
+<% end %>
