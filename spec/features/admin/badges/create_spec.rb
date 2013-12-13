@@ -21,7 +21,8 @@ describe 'Create Badge' do
     click_link 'New Badge'
 
     fill_in 'Name', with: 'Foo badge'
-    fill_in 'Description', with: 'Badge Description'
+    fill_in 'External description', with: 'Badge External Description'
+    fill_in 'Internal description', with: 'Badge Internal Description'
     fill_in 'Message', with: 'Badge Message'
     fill_in 'Filename', with: 'foo_badge'
     fill_in 'Points', with: 10

@@ -31,19 +31,20 @@ ActiveRecord::Schema.define(:version => 20131030162157) do
   end
 
   create_table "badges", :force => true do |t|
-    t.string   "name",                                 :null => false
-    t.text     "description"
+    t.string   "name",                                    :null => false
+    t.text     "external_description"
+    t.text     "internal_description"
+    t.boolean  "secret",               :default => false
     t.text     "message"
-    t.string   "filename",                             :null => false
-    t.string   "badge_type"
+    t.string   "filename",                                :null => false
     t.integer  "points"
-    t.boolean  "invertable",        :default => false
+    t.boolean  "invertable",           :default => false
     t.string   "icon_file_name"
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "blog_posts", :force => true do |t|

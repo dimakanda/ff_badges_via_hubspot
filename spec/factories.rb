@@ -15,11 +15,13 @@ FactoryGirl.define do
 
   factory :badge do
     sequence(:name) {|n| "BadgeName#{n}" }
-    sequence(:description) {|n| "BadgeDescription#{n}" }
-    sequence(:message) {|n| "BadgeDescription#{n}" }
+    sequence(:external_description) {|n| "BadgeExternalDescription#{n}" }
+    sequence(:internal_description) {|n| "BadgeInternalDescription#{n}" }
+    sequence(:message) {|n| "BadgeMessage#{n}" }
     sequence(:filename) {|n| "badge_filename_#{n}" }
     points 10
     invertable false
+    secret false
     #icon { fixture_file_upload(File.join(Rails.root, '../', 'fixtures', 'picture.png')) }
     icon_file_name { 'badge.jpg' }
     icon_content_type { 'image/jpeg' }

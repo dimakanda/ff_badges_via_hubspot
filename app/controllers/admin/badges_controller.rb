@@ -53,6 +53,6 @@ class Admin::BadgesController < Admin::AdminController
     end
 
     # def badge_params
-    #   params.require(:badge).permit(:name, :description, :message, :filename, :points, :icon)
+    #   params.require(:badge).permit(:name, :external_description, :internal_description, :message, :filename, :points, :icon)
     # end
 end

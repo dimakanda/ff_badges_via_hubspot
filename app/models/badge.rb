@@ -11,11 +11,15 @@ class Badge < ActiveRecord::Base
     content_type: { content_type: ['image/gif', 'image/png', 'image/x-png', 'image/jpeg', 'image/pjpeg', 'image/jpg']},
     size: { in: 0..5.megabytes }
   validates :invertable, inclusion: {in: [true, false]}
+  validates :secret, inclusion: {in: [true, false]}
 
   validates_uniqueness_of :filename, :name
   validates :filename, format: { with: /\A[a-z0-9_]+\z/, message: "has wrong format" }
 
-  attr_accessible :name, :description, :message, :filename, :points, :icon, :invertable
+  attr_accessible :name, :external_description, :internal_description, :message, :filename, :points, :icon, :invertable, :secret
+
+  scope :secret, where(secret: true)
+  scope :not_secret, where(secret: false)
 
   def self.badge_configured?(filename)
     Badge.where(filename: filename).exists?

@@ -22,7 +22,8 @@ describe 'Badges Index' do
 
     within "#badge_#{badge1.id}" do
       expect(page).to have_content badge1.name
-      expect(page).to have_content badge1.description
+      expect(page).to have_content badge1.external_description
+      expect(page).to have_content badge1.internal_description
       expect(page).to have_content badge1.message
       expect(page).to have_content badge1.points
       expect(page).to have_image badge1.icon.url(:thumb)
@@ -32,7 +33,8 @@ describe 'Badges Index' do
 
     within "#badge_#{badge2.id}" do
       expect(page).to have_content badge2.name
-      expect(page).to have_content badge2.description
+      expect(page).to have_content badge2.external_description
+      expect(page).to have_content badge2.internal_description
       expect(page).to have_content badge2.message
       expect(page).to have_content badge2.points
       expect(page).to have_image badge2.icon.url(:thumb)

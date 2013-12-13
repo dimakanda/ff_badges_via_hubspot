@@ -6,8 +6,13 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @badge.description %>
+  <strong>External Description:</strong>
+  <%= @badge.external_description %>
+</p>
+
+<p>
+  <strong>Internal Description:</strong>
+  <%= @badge.internal_description %>
 </p>
 
 <p>
@@ -30,6 +35,12 @@
   <strong>Invertable:</strong>
   <%= @badge.invertable %>
 </p>
+
+<p>
+  <strong>Secret:</strong>
+  <%= @badge.secret? ? 'Yes' : 'No' %>
+</p>
+
 
 <p>
   <%= image_tag @badge.icon.url(:big) %>

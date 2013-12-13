@@ -12,9 +12,12 @@
       <tr>
         <th>Icon</th>
         <th>Name</th>
-        <th>Description</th>
+        <th>External Description</th>
+        <th>Internal Description</th>
         <th>Message</th>
         <th>Filename</th>
+        <th>Secret</th>
+        <th>Invertable</th>
         <th>Points</th>
         <th>Status</th>
         <th></th>
@@ -27,9 +30,12 @@
         <tr id="badge_<%= badge.id -%>">
           <td><%= link_to image_tag(badge.icon.url(:thumb)), [:admin, badge] %></td>
           <td><%= link_to badge.name, [:admin, badge] %></td>
-          <td><%= truncate badge.description %></td>
-          <td><%= badge.message %></td>
+          <td><small><%= truncate badge.external_description %></small></td>
+          <td><small><%= truncate badge.internal_description %></small></td>
+          <td><small><%= truncate badge.message %></small></td>
           <td><%= badge.filename %>.rb</td>
+          <td><%= badge.secret? ? 'Yes' : 'No' %></td>
+          <td><%= badge.invertable? ? 'Yes' : 'No' %></td>
           <td><%= badge.points %></td>
           <td>
             <% if User.badge_defined? badge.filename -%>
