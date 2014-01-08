@@ -27,7 +27,7 @@ class BadgeGenerator < ActiveRecord::Generators::Base
   protected
 
   def badge_filename
-    name.tableize.singularize
+    name.tableize.singularize.gsub(' ', '_')
   end
 
 end
