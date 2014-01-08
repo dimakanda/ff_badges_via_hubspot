@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe '<%= name %> Badge', observer: 'FfBadges::Observers::<%= name -%>Observer' do
+describe '<%= name %> Badge', observer: 'FfBadges::Observers::<%= badge_module_name -%>Observer' do
   let!(:user) { create :user }
   let!(:badge) { create :<%= badge_filename %>_badge<%= invertable ? ', invertable: true' : '' -%>}
 

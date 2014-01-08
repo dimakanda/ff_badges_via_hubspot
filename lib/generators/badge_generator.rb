@@ -30,4 +30,8 @@ class BadgeGenerator < ActiveRecord::Generators::Base
     name.tableize.singularize.gsub(' ', '_')
   end
 
+  def badge_module_name
+    badge_filename.camelcase
+  end
+
 end
