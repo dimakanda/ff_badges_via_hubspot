@@ -112,12 +112,15 @@ ActiveRecord::Schema.define(:version => 20131030162157) do
   end
 
   create_table "user_badges", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "badge_id",   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id",        :null => false
+    t.integer  "badge_id",       :null => false
+    t.string   "badge_filename"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
+  add_index "user_badges", ["user_id", "badge_filename"], :name => "index_user_badges_on_user_id_and_badge_filename", :unique => true
+  add_index "user_badges", ["user_id", "badge_id"], :name => "index_user_badges_on_user_id_and_badge_id", :unique => true
   add_index "user_badges", ["user_id"], :name => "index_user_badges_on_user_id"
 
   create_table "users", :force => true do |t|

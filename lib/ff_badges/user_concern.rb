@@ -4,23 +4,29 @@ module FfBadges::UserConcern
   extend ActiveSupport::Concern
 
   included do
-    has_many :user_badges
+    has_many :user_badges, dependent: :destroy
     has_many :badges, through: :user_badges
  
     def self.badges(*badges)
       @@ff_badges_activated = badges.to_a
 
-      @@ff_badges_activated.each do |badge_name|
+      @@ff_badges_activated.each do |badge_filename|
         begin
           module_name = "FfBadges::Badges::#{badge_name.to_s.camelcase}"
           include module_name.constantize
 
-          unless module_name.constantize.method_defined? "deserves_#{badge_name}_badge?".to_sym
-            logger.error "ERROR: Define deserves_#{badge_name}_badge? method in #{module_name}"
+          unless module_name.constantize.method_defined? "deserves_#{badge_filename}_badge?".to_sym
+            logger.error "ERROR: Define deserves_#{badge_filename}_badge? method in #{module_name}"
           end
 
         rescue
-          logger.error "ERROR: Create module #{module_name} in #{Rails.application.class.parent_name}/extras/ff_badges/badges/#{badge_name}.rb file."
+          logger.error "ERROR: Create module #{module_name} in #{Rails.application.class.parent_name}/extras/ff_badges/badges/#{badge_filename}.rb file."
+        end
+      end
+
+      @@ff_badges_activated.each do |badge_filename|
+        define_method("has_#{badge_filename}_badge?") do
+          self.badgable? && self.user_badges.where(badge_filename: badge_filename).present?
         end
       end
     end
@@ -36,7 +42,12 @@ module FfBadges::UserConcern
   end
 
   def earn_badge!(badge)
-    self.badges << badge if badgable? && !has_badge?(badge) && deserves_badge?(badge) 
+    if badgable? && !has_badge?(badge) && deserves_badge?(badge) 
+      user_badge = self.user_badges.build
+      user_badge.badge_id = badge.id
+      user_badge.badge_filename = badge.filename
+      user_badge.save
+    end
   end
 
   def remove_badge!(badge)

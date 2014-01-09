@@ -1,6 +1,6 @@
 class Badge < ActiveRecord::Base
 
-  has_many :user_badges
+  has_many :user_badges, dependent: :destroy
   has_many :users, through: :user_badges
 
 	has_attached_file :icon, styles: { big: "200x200#", medium: "73x73#", thumb: "48x48#" }
@@ -18,8 +18,8 @@ class Badge < ActiveRecord::Base
 
   attr_accessible :name, :external_description, :internal_description, :message, :filename, :points, :icon, :invertable, :secret
 
-  scope :secret, where(secret: true)
-  scope :not_secret, where(secret: false)
+  scope :secret, -> { where(secret: true) }
+  scope :not_secret, -> { where(secret: false) }
 
   def self.badge_configured?(filename)
     Badge.where(filename: filename).exists?

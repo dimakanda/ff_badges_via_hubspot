@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Badge do
 
-  it { should have_many(:user_badges) }
+  it { should have_many(:user_badges).dependent(:destroy) }
   it { should have_many(:users).through(:user_badges) }
 
   it { should validate_presence_of(:name) }

@@ -7,5 +7,6 @@ describe UserBadge do
 
   it { should validate_presence_of(:user_id) }
   it { should validate_presence_of(:badge_id) }
+  it { should validate_presence_of(:badge_filename) }
 
 end

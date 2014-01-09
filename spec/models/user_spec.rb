@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  it { should have_many(:user_badges) }
+  it { should have_many(:user_badges).dependent(:destroy) }
   it { should have_many(:badges).through(:user_badges) }
 
   describe 'Class Methods' do
@@ -136,6 +136,17 @@ describe User do
 
     end
 
+    describe 'has_xxxxx_badge?' do
+      before do
+        @user.earn_badge! @foobist
+      end
+
+      it 'should return true or false' do
+        expect(@user.has_foobist_badge?).to be true
+        expect(@user.has_barist_badge?).to be false
+      end
+    end
+
     describe 'deserves_badge?' do
       it 'should return true or false' do
         expect(@user.deserves_badge?(@foobist)).to be true
@@ -180,8 +191,8 @@ describe User do
       end
 
       it 'should return true or false' do
-        expect(@user.has_badge?(@foobist)).to be_true
-        expect(@user.has_badge?(@barist)).to be_false
+        expect(@user.has_badge?(@foobist)).to be true
+        expect(@user.has_badge?(@barist)).to be false
       end
     end
 
