@@ -43,11 +43,17 @@ module FfBadges::UserConcern
 
   def earn_badge!(badge)
     if badgable? && !has_badge?(badge) && deserves_badge?(badge) 
-      user_badge = self.user_badges.build
-      user_badge.badge_id = badge.id
-      user_badge.badge_filename = badge.filename
-      user_badge.save
+      self.add_badge!(badge)
     end
+  end
+
+  # WARNING! adds badge without checking if user deservers it or already has it
+  # use only within earn_badge! or inside specs
+  def add_badge!(badge)
+    user_badge = self.user_badges.build
+    user_badge.badge_id = badge.id
+    user_badge.badge_filename = badge.filename
+    user_badge.save
   end
 
   def remove_badge!(badge)

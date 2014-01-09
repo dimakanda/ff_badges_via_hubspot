@@ -161,6 +161,14 @@ describe User do
       end
     end
 
+    describe 'add_badge!' do
+      it 'should add badge to user badges' do
+        @user.add_badge! @barist
+
+        expect(@user.badges).to include @barist
+      end
+    end
+
     describe 'earn_badge!' do
       it 'should add badge to user badges' do
         @user.earn_badge! @foobist
