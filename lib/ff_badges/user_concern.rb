@@ -12,7 +12,7 @@ module FfBadges::UserConcern
 
       @@ff_badges_activated.each do |badge_filename|
         begin
-          module_name = "FfBadges::Badges::#{badge_name.to_s.camelcase}"
+          module_name = "FfBadges::Badges::#{badge_filename.to_s.camelcase}"
           include module_name.constantize
 
           unless module_name.constantize.method_defined? "deserves_#{badge_filename}_badge?".to_sym
