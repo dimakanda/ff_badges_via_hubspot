@@ -8,10 +8,9 @@ module FfBadges::SpecHelpers
   end
 
   def badge_check_email(badge)
-    email = ActionMailer::Base.deliveries.last
-    expect(email.to).to eql [user.email]
-    expect(email.subject).to eql "You have earned #{badge.name} badge."
-    expect(email.html_part.body.decoded).to match /#{badge.message}/
+    emails_data = ActionMailer::Base.deliveries.collect {|e| [e.to, e.subject]}
+
+    expect(emails_data).to include([[user.email], "You have earned #{badge.name} badge."])
   end
 
   def badge_check_page_content(badge)

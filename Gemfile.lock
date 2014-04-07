@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ff_badges (1.2.0)
+    ff_badges (1.3.5)
       rails (~> 3.2)
       redis
       simple_form
@@ -37,7 +37,7 @@ GEM
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     addressable (2.3.5)
-    arel (3.0.2)
+    arel (3.0.3)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     capybara (2.1.0)
@@ -86,7 +86,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.0)
       mime-types
-    polyglot (0.3.3)
+    polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -149,7 +149,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.37)
+    tzinfo (0.3.39)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
