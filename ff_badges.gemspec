@@ -22,13 +22,10 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "mysql2"
 
-  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-rails', '~> 2.99'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'factory_girl_rails'
-  s.add_development_dependency 'sorcery'
   s.add_development_dependency 'launchy'
-  s.add_development_dependency 'simple_form'
-  s.add_development_dependency 'shoulda-matchers'
 
   s.test_files = Dir["spec/**/*"]
 end

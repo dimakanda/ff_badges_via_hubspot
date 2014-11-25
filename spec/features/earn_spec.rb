@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Earn badge', observer: 'FfBadges::Observers::ForgetfulObserver' do
-  context 'Badgable users are set', observers: FfBadges::Observers::ForgetfulObserver do
+  context 'Badgable users are set' do
     let!(:user1) { create :user, email: 'john@bar.com', name: 'John Cobra' }
     let!(:user_who_forgot) { create :user, email: 'anne@foo.com', name: 'Anne Cobra',
                                     reset_password_token: 'some', reset_password_email_sent_at: Time.now }
@@ -16,11 +16,10 @@ describe 'Earn badge', observer: 'FfBadges::Observers::ForgetfulObserver' do
       user1.update_attribute :reset_password_token, '123'
       user_who_forgot.update_attribute :reset_password_token, nil
 
-      expect(user1.badges).to eql []
-      expect(user_who_forgot.badges).to eql [badge]
+      expect(user1.badges).to be_empty
+      expect(user_who_forgot.badges).to include badge
+      expect(user_who_forgot.badges.size).to eq 1
     end
-
-
   end
 
 end

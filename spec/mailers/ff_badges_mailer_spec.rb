@@ -1,5 +1,3 @@
-require "spec_helper"
-
 describe FfBadgesMailer do
 
   describe 'badge_earned_email' do
