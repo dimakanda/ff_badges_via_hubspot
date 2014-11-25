@@ -6,7 +6,9 @@ module FfBadges::UserConcern
   included do
     has_many :user_badges, dependent: :destroy
     has_many :badges, through: :user_badges
- 
+
+    @@ff_badges_activated = []
+
     def self.badges(*badges)
       @@ff_badges_activated = badges.to_a
 
