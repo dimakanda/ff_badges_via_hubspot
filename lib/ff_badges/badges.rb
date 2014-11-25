@@ -1,3 +1,3 @@
 module FfBadges::Badges
-	extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 end

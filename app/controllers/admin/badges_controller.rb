@@ -18,7 +18,7 @@ class Admin::BadgesController < Admin::AdminController
   end
 
   def create
-    @badge = Badge.new(params[:badge])
+    @badge = Badge.new safe_params
 
     if @badge.save
       redirect_to [:admin, @badge], 
@@ -31,7 +31,7 @@ class Admin::BadgesController < Admin::AdminController
   end
 
   def update
-    if @badge.update_attributes(params[:badge])
+    if @badge.update(safe_params)
       redirect_to [:admin, @badge], 
         notice: "Badge was successfully updated.<br />
           Define badge conditions in <strong>/extras/ff_badges/badges/#{@badge.filename}.rb</strong>.".html_safe
@@ -52,7 +52,7 @@ class Admin::BadgesController < Admin::AdminController
       @badge = Badge.find(params[:id])
     end
 
-    # def badge_params
-    #   params.require(:badge).permit(:name, :external_description, :internal_description, :message, :filename, :points, :icon)
-    # end
+    def safe_params
+      params.require(:badge).permit(:name, :external_description, :internal_description, :message, :filename, :points, :icon, :invertable, :secret)
+    end
 end

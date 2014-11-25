@@ -14,12 +14,13 @@ gemspec
 # gem 'debugger'
 
 gem 'sorcery'
+gem 'rails-observers'
 gem 'paperclip'
 gem 'simple_form'
-gem 'shoulda-matchers'
 gem 'redis'
 
 group :test do
   gem "rspec"
+  gem 'shoulda-matchers'
   gem "fakeredis", require: "fakeredis/rspec"
 end

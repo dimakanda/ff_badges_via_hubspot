@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe UserBadge do
+describe UserBadge, :type => :model do
 
-  it { should belong_to(:user) }
-  it { should belong_to(:badge) }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:badge) }
 
-  it { should validate_presence_of(:user_id) }
-  it { should validate_presence_of(:badge_id) }
-  it { should validate_presence_of(:badge_filename) }
+  it { is_expected.to validate_presence_of(:user_id) }
+  it { is_expected.to validate_presence_of(:badge_id) }
+  it { is_expected.to validate_presence_of(:badge_filename) }
 
 end

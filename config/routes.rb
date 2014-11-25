@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :badges
 
   namespace :admin do
-  	resources :badges
+    resources :badges
   end
 
 end

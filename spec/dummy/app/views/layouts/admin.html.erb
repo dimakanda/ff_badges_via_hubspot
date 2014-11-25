@@ -18,26 +18,26 @@
         </a>
 
         <div class="nav-collapse">
-					<ul class="nav pull-left" id="admin_main_nav">
-						<li id="admin_root_li"><%= link_to "Admin Dash", admin_root_path, id: 'admin_root_link' %></li>
+          <ul class="nav pull-left" id="admin_main_nav">
+            <li id="admin_root_li"><%= link_to "Admin Dash", admin_root_path, id: 'admin_root_link' %></li>
             <li id="admin_badges_li"><%= link_to "Badges", admin_badges_path, id: 'admin_badges_link' %></li>
-					</ul>
+          </ul>
 
-					<ul class="nav pull-right">
-					  <% if current_user %>
+          <ul class="nav pull-right">
+            <% if current_user %>
               <li id="logout_li"><%= link_to "Logout", logout_path, id: 'logout_link' %></li>
-         	  <% else %>
+             <% else %>
                <li id="login_li"><%= link_to "Log In", login_path, id: 'login_link' %></li>
-         	  <% end %>
+             <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
   </div>
   <div class="container">
-	  <%= render partial: 'shared/flash' %>
-		<%= yield %>
-	</div>
+    <%= render partial: 'shared/flash' %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

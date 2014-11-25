@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples_for_auth'
 
-describe 'Create Badge' do
+describe 'Create Badge', :type => :feature do
 
   before do
     @administrator = create :administrator

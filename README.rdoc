@@ -1,3 +1,10 @@
 = FfBadges
 
 This project rocks and uses MIT-LICENSE.
+
+= Specs
+
+Before first run you'll need to set up database for a dummy application used in specs:
+edit spec/dummy/config/database.yml
+rake db:create
+RAILS_ENV=test rake db:schema:load

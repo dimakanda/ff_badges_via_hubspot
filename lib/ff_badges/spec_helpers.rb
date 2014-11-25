@@ -1,6 +1,6 @@
 module FfBadges::SpecHelpers
 
-	def badge_check_modal(badge)
+  def badge_check_modal(badge)
     within '#ff_badges_modal' do
       expect(page).to have_content badge.name
       expect(page).to have_content badge.message

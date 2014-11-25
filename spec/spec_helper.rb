@@ -16,14 +16,12 @@ include Sorcery::TestHelpers::Rails
 
 Rails.backtrace_cleaner.remove_silencers!
 # Load support files
-
-Dir["#{File.dirname(__FILE__)}/support/*.rb"].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-
 include Helpers
 
 RSpec.configure do |config|
-
+  config.infer_spec_type_from_file_location!
+  config.expose_current_running_example_as :example
   config.mock_with :rspec
   config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = false
@@ -40,6 +38,7 @@ RSpec.configure do |config|
     ActiveRecord::Base.observers.disable :all
 
     # find out which observers this spec needs
+
     observers = example.metadata[:observer] || example.metadata[:observers]
 
     # turn on observers as needed
@@ -53,7 +52,3 @@ RSpec.configure do |config|
   end
 
 end
-
-# hack for Socery, reload User model
-Object.send(:remove_const, 'User')
-load 'user.rb'

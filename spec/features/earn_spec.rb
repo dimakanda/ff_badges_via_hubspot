@@ -1,26 +1,25 @@
 require 'spec_helper'
 
-describe 'Earn badge', observer: 'FfBadges::Observers::ForgetfulObserver' do
-
+describe 'Earn badge', type: :feature, observer: 'FfBadges::Observers::ForgetfulObserver' do
   context 'Badgable users are set' do
-    require_dependency('../../lib/ff_badges/observers/forgetful_observer.rb')
-    ActiveRecord::Base.observers += ["FfBadges::Observers::ForgetfulObserver"]
-
     let!(:user1) { create :user, email: 'john@bar.com', name: 'John Cobra' }
-    let!(:user2) { create :user, email: 'anne@foo.com', name: 'Anne Cobra' }
+    let!(:user_who_forgot) { create :user, email: 'anne@foo.com', name: 'Anne Cobra',
+                                    reset_password_token: 'some', reset_password_email_sent_at: Time.now }
     let!(:badge) { create :badge, name: 'Forgetful', filename: 'forgetful' }
 
-    xit 'should create new badge only for badgable user' do
-      user1.update_attribute :reset_password_token, '123'
-      user1.update_attribute :reset_password_token, nil
-
+    it 'triggers observer method on updating instance of User' do
+      expect(FfBadges::Observers::ForgetfulObserver.instance).to receive(:after_update).with(user1)
       user1.update_attributes name: 'John Foo'
-      user2.update_attributes name: 'Anne Foo'
-
-      expect(user1.badges).to eql []
-      expect(user2.badges).to eql [badge]
     end
 
+    it 'creates new badge only for badgable user' do
+      user1.update_attribute :reset_password_token, '123'
+      user_who_forgot.update_attribute :reset_password_token, nil
+
+      expect(user1.badges).to be_empty
+      expect(user_who_forgot.badges).to include badge
+      expect(user_who_forgot.badges.size).to eq 1
+    end
   end
 
 end
