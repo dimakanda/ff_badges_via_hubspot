@@ -4,9 +4,9 @@ class AddBadgeFilenameToUserBadges < ActiveRecord::Migration
 
     UserBadge.reset_column_information
     UserBadge.all.each do |ub|
-    	if badge = Badge.where(id: ub.badge_id).first
-    		ub.update_column :badge_filename, badge.filename
-    	end
+      if badge = Badge.where(id: ub.badge_id).first
+        ub.update_column :badge_filename, badge.filename
+      end
     end
 
     add_index :user_badges, [:user_id, :badge_filename], unique: true
