@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Earn badge', observer: 'FfBadges::Observers::ForgetfulObserver' do
+describe 'Earn badge', type: :feature, observer: 'FfBadges::Observers::ForgetfulObserver' do
   context 'Badgable users are set' do
     let!(:user1) { create :user, email: 'john@bar.com', name: 'John Cobra' }
     let!(:user_who_forgot) { create :user, email: 'anne@foo.com', name: 'Anne Cobra',

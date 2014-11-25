@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
 
-  it { should have_many(:user_badges).dependent(:destroy) }
-  it { should have_many(:badges).through(:user_badges) }
+  it { is_expected.to have_many(:user_badges).dependent(:destroy) }
+  it { is_expected.to have_many(:badges).through(:user_badges) }
 
   describe 'Class Methods' do
 

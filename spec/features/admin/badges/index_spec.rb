@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples_for_auth'
 
-describe 'Badges Index' do
+describe 'Badges Index', :type => :feature do
 
   before do
     @administrator = create :administrator
@@ -62,7 +62,7 @@ describe 'Badges Index' do
     user2 = create :user, email: 'barsky@bar.com'
     user3 = create :user, email: 'bar@foo.com'
 
-    User.stub(:badgable_users).and_return([user1, user2])
+    allow(User).to receive(:badgable_users).and_return([user1, user2])
 
     click_link 'Badges'
 

@@ -1,4 +1,4 @@
-describe FfBadgesMailer do
+describe FfBadgesMailer, :type => :mailer do
 
   describe 'badge_earned_email' do
 

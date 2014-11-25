@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe Badge do
+describe Badge, :type => :model do
 
-  it { should have_many(:user_badges).dependent(:destroy) }
-  it { should have_many(:users).through(:user_badges) }
+  it { is_expected.to have_many(:user_badges).dependent(:destroy) }
+  it { is_expected.to have_many(:users).through(:user_badges) }
 
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:message) }
-  it { should validate_presence_of(:icon) }
-  it { should validate_presence_of(:filename) }
-  it { should have_attached_file(:icon) }
-  it { should validate_numericality_of(:points).only_integer }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:message) }
+  it { is_expected.to validate_presence_of(:icon) }
+  it { is_expected.to validate_presence_of(:filename) }
+  it { is_expected.to have_attached_file(:icon) }
+  it { is_expected.to validate_numericality_of(:points).only_integer }
 
   it 'should validate uniqueness of name' do
     create :badge, name: 'Foo'

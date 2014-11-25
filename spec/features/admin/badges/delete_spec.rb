@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared_examples_for_auth'
 
-describe 'Delete badge' do
+describe 'Delete badge', :type => :feature do
 
   before do
     @administrator = create :administrator
