@@ -18,8 +18,6 @@ class Badge < ActiveRecord::Base
   validates_uniqueness_of :filename, :name
   validates :filename, format: { with: /\A[a-z0-9_]+\z/, message: "has wrong format" }
 
-  attr_accessible :name, :external_description, :internal_description, :message, :filename, :points, :icon, :invertable, :secret
-
   scope :secret, -> { where(secret: true) }
   scope :not_secret, -> { where(secret: false) }
 
