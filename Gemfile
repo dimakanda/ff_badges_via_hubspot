@@ -13,6 +13,7 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
+gem 'rails-observers'
 gem 'sorcery'
 gem 'paperclip'
 gem 'simple_form'
