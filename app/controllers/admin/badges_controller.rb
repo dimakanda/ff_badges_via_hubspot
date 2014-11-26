@@ -7,9 +7,6 @@ class Admin::BadgesController < Admin::AdminController
     @not_configured_badges = @activated_badges - @badges.collect(&:filename).map(&:to_sym)
   end
 
-  def show
-  end
-
   def new
     @badge = Badge.new
   end
@@ -21,7 +18,7 @@ class Admin::BadgesController < Admin::AdminController
     @badge = Badge.new safe_params
 
     if @badge.save
-      redirect_to [:admin, @badge], 
+      redirect_to [:admin, :badges],
         notice: "Badge was successfully created.<br />
           Define badge conditions in <strong>/extras/ff_badges/badges/#{@badge.filename}.rb</strong><br />
           and activate it in <strong>/app/models/user.rb</strong>.".html_safe
@@ -32,7 +29,7 @@ class Admin::BadgesController < Admin::AdminController
 
   def update
     if @badge.update(safe_params)
-      redirect_to [:admin, @badge], 
+      redirect_to [:admin, :badges],
         notice: "Badge was successfully updated.<br />
           Define badge conditions in <strong>/extras/ff_badges/badges/#{@badge.filename}.rb</strong>.".html_safe
     else
