@@ -7,9 +7,15 @@ This project rocks and uses MIT-LICENSE.
 
 1. Add gem to the gemfile `gem 'ff_badges', git: 'git@bitbucket.org:firefield/ff_badges.git'`
 2. Copy migrations `rake railties:install:migrations` and migrate
-3. include the users concern in your user model `include FfBadges::UserConcern`
+3. Include the users concern in your user model `include FfBadges::UserConcern`
 4. Add /extras folder to the loaded paths in your application.rb:  
    `config.autoload_paths += %W(#{config.root}/lib #{config.root}/extras)`
+5. We know you want to test your badges well, that's why you should add the following to your spec_helper.rb:
+
+       `include FfBadges::SpecHelpers`
+
+       Thanks to this you can use: `badge_check_modal`, `badge_check_email` and `badge_check_page_content`.
+
 
 ## Generators ##
 
