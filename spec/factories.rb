@@ -26,6 +26,9 @@ FactoryGirl.define do
     icon_file_name { 'badge.jpg' }
     icon_content_type { 'image/jpeg' }
     icon_file_size { 33344 }
+    icon_inactive_file_name { 'badge.jpg' }
+    icon_inactive_content_type { 'image/jpeg' }
+    icon_inactive_file_size { 33344 }
   end
   
 end

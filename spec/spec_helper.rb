@@ -3,7 +3,6 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__) # let the 
 
 require 'rspec/rails'
 
-require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'sorcery'
 require 'paperclip/matchers'

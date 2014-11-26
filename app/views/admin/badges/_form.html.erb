@@ -9,6 +9,7 @@
     <%= f.input :invertable, as: :boolean, label: 'User losts the badge when he stops fullfiling conditions.' %>
     <%= f.input :secret, as: :boolean, label: 'Hidden in badges index.' %>
     <%= f.input :icon, as: :image_preview, input_html: {preview_version: :medium} %>
+    <%= f.input :icon_inactive, label: 'Inactive badge icon', as: :image_preview, input_html: {preview_version: :medium} %>
   </div>
 
   <div class="form-actions">

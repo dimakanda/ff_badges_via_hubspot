@@ -28,6 +28,7 @@ describe 'Create Badge', :type => :feature do
     fill_in 'Points', with: 10
     check 'User losts the badge when he stops fullfiling conditions.'
     attach_file 'Icon', File.join(Rails.root, '../', 'fixtures', 'picture.png')
+    attach_file 'Inactive badge icon', File.join(Rails.root, '../', 'fixtures', 'picture.png')
 
     click_button 'Create Badge'
 

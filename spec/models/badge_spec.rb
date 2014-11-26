@@ -8,8 +8,10 @@ describe Badge, :type => :model do
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:message) }
   it { is_expected.to validate_presence_of(:icon) }
+  it { is_expected.to validate_presence_of(:icon_inactive) }
   it { is_expected.to validate_presence_of(:filename) }
   it { is_expected.to have_attached_file(:icon) }
+  it { is_expected.to have_attached_file(:icon_inactive) }
   it { is_expected.to validate_numericality_of(:points).only_integer }
 
   it 'should validate uniqueness of name' do
