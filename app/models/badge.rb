@@ -3,11 +3,11 @@ class Badge < ActiveRecord::Base
   has_many :user_badges, dependent: :destroy
   has_many :users, through: :user_badges
 
-  has_attached_file :icon, styles: { big: "200x200#", medium: "73x73#", thumb: "48x48#" },
+  has_attached_file :icon, styles: { big: "140x90#", medium: "112x72#", thumb: "48x31#" },
                     path: ":rails_root/public/system/badges/active/:id_partition/:style/:filename",
                     url: "/system/badges/active/:id_partition/:style/:filename"
 
-  has_attached_file :icon_inactive, styles: { big: "200x200#", medium: "73x73#", thumb: "48x48#" },
+  has_attached_file :icon_inactive, styles: { big: "140x90#", medium: "112x72#", thumb: "48x31#" },
                     path: ":rails_root/public/system/badges/inactive/:id_partition/:style/:filename",
                     url: "/system/badges/inactive/:id_partition/:style/:filename"
 
