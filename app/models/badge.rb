@@ -34,4 +34,11 @@ class Badge < ActiveRecord::Base
     Badge.where(filename: filename).exists?
   end
 
+  def date_earned(user)
+    return nil unless user
+    user_badge_relation = user_badges.where(user: user).first
+    return nil unless user_badge_relation.present?
+    user_badge_relation.created_at
+  end
+
 end

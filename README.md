@@ -8,9 +8,13 @@ This project rocks and uses MIT-LICENSE.
 1. Add gem to the gemfile `gem 'ff_badges', git: 'git@bitbucket.org:firefield/ff_badges.git'`
 2. Copy migrations `rake railties:install:migrations` and migrate
 3. Include the users concern in your user model `include FfBadges::UserConcern`
-4. Add /extras folder to the loaded paths in your application.rb:  
+4. Define a `badgeable_users` scope in your user model. For example:
+
+      `scope :badgeable_users, -> { where.not confirmed_at: nil }`
+5. Add /extras folder to the loaded paths in your application.rb:
    `config.autoload_paths += %W(#{config.root}/lib #{config.root}/extras)`
-5. We know you want to test your badges well, that's why you should add the following to your spec_helper.rb:
+6. Badges require redis server. You need to start it, usually with: `redis-server`
+7. We know you want to test your badges well, that's why you should add the following to your spec_helper.rb:
 
        `include FfBadges::SpecHelpers`
 

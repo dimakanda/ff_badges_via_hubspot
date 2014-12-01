@@ -41,6 +41,36 @@ describe Badge, :type => :model do
     expect(badge3.errors[:filename]).to match_array ['has wrong format']
   end
 
+  describe '#date_earned' do
+    let!(:badge) { badge = create :badge, name: 'Foobist', filename: 'foobist', invertable: true }
+
+    before do
+      User.class_eval do
+        badges :foobist
+      end
+    end
+
+    it 'returns nil if user not passed' do
+      date = badge.date_earned(nil)
+      expect(date).to be_nil
+    end
+
+    it 'returns nil if user has no badge' do
+      user = create :user, name: 'John McFoo'
+      date = badge.date_earned(user)
+      expect(date).to be_nil
+    end
+
+    it 'returns creation date of badges_users record' do
+      user = create :user, name: 'John McFoo'
+      user.earn_badge! badge
+      ub = badge.user_badges.last
+      date = badge.date_earned(user)
+      expect(date).to eq ub.created_at
+    end
+
+  end
+
   describe 'Class Methods' do
 
     describe 'badge_configured?' do
@@ -51,7 +81,7 @@ describe Badge, :type => :model do
         expect(Badge.badge_configured?('foobarista')).to eql false
       end
     end
-    
+
   end
 
 end
