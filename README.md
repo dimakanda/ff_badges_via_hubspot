@@ -10,7 +10,7 @@ This project rocks and uses MIT-LICENSE.
     `gem 'ff_badges', git: 'git@bitbucket.org:firefield/ff_badges.git'`
 
 2. Copy migrations `rake railties:install:migrations` and migrate
-3. Include the users concern in your user model `include FfBadges::UserConcern`
+3. Include the users concern in your user model `include FfBadges::UserConcern` and in your ApplicationController `include Concerns::FfBadges::ShowEarnedBadges`
 4. Define a `badgeable_users` scope in your user model. For example: 
 
     `scope :badgeable_users, -> { where.not confirmed_at: nil }`
