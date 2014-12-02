@@ -18,11 +18,20 @@ This project rocks and uses MIT-LICENSE.
 5. Add /extras folder to the loaded paths in your application.rb:
    `config.autoload_paths += %W(#{config.root}/lib #{config.root}/extras)`
 6. FFBadges require redis server. You need to start it, usually with: `redis-server`
-7. You want to test your badges well, that's why you should add the following to your spec_helper.rb:
 
-       `include FfBadges::SpecHelpers`
+### Badge earned modals ###
+1. Add `include Concerns::FfBadges::ShowEarnedBadges` to your `application_controller.rb`
+2. Add `//= require ff_badges` to your application.js
+3. Call `<%= notice_earned_badges %>` within the application template or any other that you want to use.
+4. You can create a partial at `extras/ff_badges/views/modal.html.erb` which will be used as a modal when user earns a badge. Default partial will be used otherwise.
 
-       Thanks to this you can use: `badge_check_modal`, `badge_check_email` and `badge_check_page_content`.
+
+### Specs helpers ###
+You want to test your badges well, that's why you should add the following to your spec_helper.rb:
+
+       include FfBadges::SpecHelpers
+
+Thanks to this you can use: `badge_check_modal`, `badge_check_email` and `badge_check_page_content`.
 
 
 ## Generators ##
@@ -37,3 +46,8 @@ Before first run you'll need to set up database for a dummy application used in 
 * edit spec/dummy/config/database.yml
 * `rake db:create`
 * `RAILS_ENV=test rake db:schema:load`
+
+
+## Development ##
+
+While using ff_badges gem within your application you may let you know the bundler that you have the gem locally. This saves time: [check this tutorial](http://ryanbigg.com/2013/08/bundler-local-paths/)
