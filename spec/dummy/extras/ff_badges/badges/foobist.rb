@@ -4,4 +4,8 @@ module FfBadges::Badges::Foobist
     self.name.include? 'Foo'
   end
 
+  def foobist_badge_percent
+    self.name.include?('Foo') ? 100 : 0
+  end
+
 end

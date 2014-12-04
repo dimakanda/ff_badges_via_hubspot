@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ff_badges (1.4.8)
+    ff_badges (1.4.9)
       rails (~> 4.1.8)
       rails-observers
       redis

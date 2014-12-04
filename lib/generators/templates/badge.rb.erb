@@ -1,8 +1,12 @@
 module FfBadges::Badges::<%= badge_module_name %>
 
   def deserves_<%= badge_filename -%>_badge?
-    # TODO: conditions for earning badge here 
+    # TODO: conditions for earning badge here
     # it should return true/false only
+  end
+
+  def <%= badge_filename -%>_badge_percent
+    # TODO: add a logic that will return an integer between 0 and 100
   end
 
 end

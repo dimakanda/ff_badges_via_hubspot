@@ -4,4 +4,8 @@ module FfBadges::Badges::Forgetful
     self.reset_password_email_sent_at?
   end
 
+  def forgetful_badge_percent
+    self.reset_password_email_sent_at? ? 100 : 0
+  end
+
 end

@@ -154,10 +154,24 @@ describe User, :type => :model do
       end
     end
 
+    describe 'badge_percentage' do
+      it 'should return an integer representation of percentage' do
+        expect(@user.badge_percent(@foobist)).to be 100
+        expect(@user.badge_percent(@barist)).to be 0
+      end
+    end
+
     describe 'deserves_xxxxx_badge?' do
       it 'should return true or false' do
         expect(@user.deserves_foobist_badge?).to be true
         expect(@user.deserves_barist_badge?).to be false
+      end
+    end
+
+    describe 'xxxx_badge_percent' do
+      it 'returns an integer value' do
+        expect(@user.foobist_badge_percent).to be 100
+        expect(@user.barist_badge_percent).to be 0
       end
     end
 

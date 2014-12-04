@@ -21,6 +21,10 @@ module FfBadges::UserConcern
             logger.error "ERROR: Define deserves_#{badge_filename}_badge? method in #{module_name}"
           end
 
+          unless module_name.constantize.method_defined? "#{badge_filename}_badge_percent".to_sym
+            logger.error "ERROR: Define #{badge_filename}_badge_percent method in #{module_name}"
+          end
+
         rescue
           logger.error "ERROR: Create module #{module_name} in #{Rails.application.class.parent_name}/extras/ff_badges/badges/#{badge_filename}.rb file."
         end
@@ -43,8 +47,12 @@ module FfBadges::UserConcern
     self.send "deserves_#{badge.filename}_badge?" if badgable?
   end
 
+  def badge_percent(badge)
+    self.send "#{badge.filename}_badge_percent"
+  end
+
   def earn_badge!(badge)
-    if badgable? && !has_badge?(badge) && deserves_badge?(badge) 
+    if badgable? && !has_badge?(badge) && deserves_badge?(badge)
       self.add_badge!(badge)
     end
   end
