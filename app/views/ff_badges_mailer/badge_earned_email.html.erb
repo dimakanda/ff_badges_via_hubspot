@@ -1,12 +1,12 @@
-<h1>Congratulations, you have earned <%= @badge.name -%> badge!</h1>
+<%= content_for :title do %>
+  <h1>Congratulations, you have earned <%= @badge.name -%> badge!</h1>
+<% end %>
 
 <p>
   <%= image_tag @badge.icon.url(:big) %>
   <%= @badge.message %>
 </p>
 
-<% if @badge.points %>
-  <p>
-    You have earned <strong><%= pluralize @badge.points, 'point' -%></strong>.
-  </p>
-<% end %>
+<p>Thank you,</p>
+
+<p>The Write the World Team</p>

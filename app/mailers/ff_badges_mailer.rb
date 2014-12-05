@@ -1,6 +1,7 @@
 class FfBadgesMailer < ActionMailer::Base
-  default from: ENV.has_key?('DEFAULT_FROM_EMAIL') ? ENV['DEFAULT_FROM_EMAIL'] : 'change.me@email.com'
+
   layout 'email'
+  default from: ENV.has_key?('DEFAULT_FROM_EMAIL') ? ENV['DEFAULT_FROM_EMAIL'] : %("Write the World" <support@writetheworld.com>)
 
   def badge_earned_email(user, badge)
     @user = user
