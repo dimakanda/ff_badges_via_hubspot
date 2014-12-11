@@ -2,10 +2,8 @@
   <h1>Congratulations, you have earned <%= @badge.name -%> badge!</h1>
 <% end %>
 
-<p>
-  <%= image_tag @badge.icon.url(:big) %>
-  <%= @badge.message %>
-</p>
+<p><%= image_tag @badge.icon.url(:big) %></p>
+<p><%= @badge.message %></p>
 
 <p>Thank you,</p>
 
