@@ -51,16 +51,20 @@ module FfBadges::UserConcern
     self.send "#{badge.filename}_badge_percent"
   end
 
-  def earn_badge!(badge)
+  def earn_badge!(badge, *options)
     if badgable? && !has_badge?(badge) && deserves_badge?(badge)
-      self.add_badge!(badge)
+      self.add_badge!(badge, *options)
     end
   end
 
   # WARNING! adds badge without checking if user deservers it or already has it
   # use only within earn_badge! or inside specs
-  def add_badge!(badge)
+  def add_badge!(badge, *options)
+    options = options.extract_options!
+    options.reverse_merge! skip_email: false
+
     user_badge = self.user_badges.build
+    user_badge.skip_email = options[:skip_email]
     user_badge.badge_id = badge.id
     user_badge.badge_filename = badge.filename
     user_badge.save
