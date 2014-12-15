@@ -9,4 +9,35 @@ describe UserBadge, :type => :model do
   it { is_expected.to validate_presence_of(:badge_id) }
   it { is_expected.to validate_presence_of(:badge_filename) }
 
+  it "Doesn't send email if skip_email passed" do
+    badge = create :badge, name: 'Foobist', filename: 'foobist', invertable: true
+    user = create :user, email: 'foosky@bar.com', name: 'John McFoo'
+
+    User.class_eval do
+      badges :foobist
+    end
+
+    expect(user.deserves_badge? badge).to eq true
+
+    expect(FfBadgesMailer).to_not receive(:badge_earned_email)
+    user.earn_badge! badge, skip_email: true
+  end
+
+
+  it 'sends email on earning badge by default' do
+    badge = create :badge, name: 'Foobist', filename: 'foobist', invertable: true
+    user = create :user, email: 'foosky@bar.com', name: 'John McFoo'
+
+    User.class_eval do
+      badges :foobist
+    end
+
+    expect(user.deserves_badge? badge).to eq true
+
+    email = double 'email'
+    expect(email).to receive(:deliver)
+    expect(FfBadgesMailer).to receive(:badge_earned_email).and_return email
+    user.earn_badge! badge
+  end
+
 end

@@ -3,9 +3,11 @@ class UserBadge < ActiveRecord::Base
   belongs_to :user
   belongs_to :badge
 
+  attr_accessor :skip_email
+
   validates :user_id, :badge_id, :badge_filename, presence: true
 
-  after_create lambda { |record| FfBadgesMailer.badge_earned_email(record.user, record.badge).deliver }
+  after_create lambda { |record| FfBadgesMailer.badge_earned_email(record.user, record.badge).deliver unless record.skip_email }
   after_create :set_badge_in_redis
   after_create :add_event_badge_earn
 

@@ -20,6 +20,13 @@ describe 'Earn badge', type: :feature, observer: 'FfBadges::Observers::Forgetful
       expect(user_who_forgot.badges).to include badge
       expect(user_who_forgot.badges.size).to eq 1
     end
+
+    it 'sends email to user' do
+      user_who_forgot.update_attribute :reset_password_token, nil
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail.to).to eql [user_who_forgot.email]
+    end
+
   end
 
 end
