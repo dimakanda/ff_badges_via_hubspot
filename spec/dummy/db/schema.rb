@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20131030162157) do
     t.datetime "updated_at",     :null => false
   end
 
-  add_index "user_badges", ["user_id", "badge_filename"], :name => "index_user_badges_on_user_id_and_badge_filename", :unique => true
   add_index "user_badges", ["user_id", "badge_id"], :name => "index_user_badges_on_user_id_and_badge_id", :unique => true
   add_index "user_badges", ["user_id"], :name => "index_user_badges_on_user_id"
 
