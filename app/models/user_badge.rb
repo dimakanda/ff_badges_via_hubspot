@@ -6,6 +6,7 @@ class UserBadge < ActiveRecord::Base
   attr_accessor :skip_email
 
   validates :user_id, :badge_id, :badge_filename, presence: true
+  validates_uniqueness_of :badge_id, scope: :user_id
 
   after_create :send_badge_email
   after_create :set_badge_in_redis
