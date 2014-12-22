@@ -7,11 +7,15 @@ class UserBadge < ActiveRecord::Base
 
   validates :user_id, :badge_id, :badge_filename, presence: true
 
-  after_create lambda { |record| FfBadgesMailer.badge_earned_email(record.user, record.badge).deliver unless record.skip_email }
+  after_create :send_badge_email
   after_create :set_badge_in_redis
   after_create :add_event_badge_earn
 
   private
+
+  def send_badge_email
+    FfBadgesMailer.badge_earned_email(user, badge).deliver unless skip_email
+  end
 
   def set_badge_in_redis
     $redis.sadd "ff_badges_#{self.user_id}", self.badge.filename
