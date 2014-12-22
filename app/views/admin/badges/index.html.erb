@@ -30,7 +30,8 @@
         <tr id="badge_<%= badge.id -%>">
           <td><%= link_to image_tag(badge.icon.url(:thumb)), [:admin, badge] %></td>
           <td><%= link_to badge.name, [:admin, badge] %></td>
-          <td><small><%= truncate badge.external_description %></small></td>
+          <td><small><%= truncate badge.external_unearned_description %></small></td>
+          <td><small><%= truncate badge.external_earned_description %></small></td>
           <td><small><%= truncate badge.internal_description %></small></td>
           <td><small><%= truncate badge.message %></small></td>
           <td><%= badge.filename %>.rb</td>
