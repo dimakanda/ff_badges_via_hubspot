@@ -15,7 +15,8 @@ FactoryGirl.define do
 
   factory :badge do
     sequence(:name) {|n| "BadgeName#{n}" }
-    sequence(:external_description) {|n| "BadgeExternalDescription#{n}" }
+    sequence(:external_earned_description) {|n| "BadgeExternalEARNEDDescription#{n}" }
+    sequence(:external_unearned_description) {|n| "BadgeExternalUNEARNEDDescription#{n}" }
     sequence(:internal_description) {|n| "BadgeInternalDescription#{n}" }
     sequence(:message) {|n| "BadgeMessage#{n}" }
     sequence(:filename) {|n| "badge_filename_#{n}" }

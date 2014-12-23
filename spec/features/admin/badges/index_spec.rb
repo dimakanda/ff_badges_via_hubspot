@@ -13,8 +13,8 @@ describe 'Badges Index', :type => :feature do
   end
 
   it 'should show badge details' do
-    badge1 = create :badge, name: 'Forgetful', filename: 'forgetful'
-    badge2 = create :badge
+    badge1 = create :badge, name: 'Forgetful', filename: 'forgetful', external_earned_description: 'earnedDesc', external_unearned_description: 'unearnedDesc'
+    badge2 = create :badge, external_earned_description: 'earnedDesc2', external_unearned_description: 'unearnedDesc2'
 
     within "#admin_main_nav" do
       click_link 'Badges'
@@ -22,7 +22,8 @@ describe 'Badges Index', :type => :feature do
 
     within "#badge_#{badge1.id}" do
       expect(page).to have_content badge1.name
-      expect(page).to have_content badge1.external_description
+      expect(page).to have_content badge1.external_earned_description
+      expect(page).to have_content badge1.external_unearned_description
       expect(page).to have_content badge1.internal_description
       expect(page).to have_content badge1.message
       expect(page).to have_content badge1.points
@@ -33,7 +34,8 @@ describe 'Badges Index', :type => :feature do
 
     within "#badge_#{badge2.id}" do
       expect(page).to have_content badge2.name
-      expect(page).to have_content badge2.external_description
+      expect(page).to have_content badge2.external_earned_description
+      expect(page).to have_content badge2.external_unearned_description
       expect(page).to have_content badge2.internal_description
       expect(page).to have_content badge2.message
       expect(page).to have_content badge2.points

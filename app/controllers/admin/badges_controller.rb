@@ -50,6 +50,6 @@ class Admin::BadgesController < Admin::AdminController
     end
 
     def safe_params
-      params.require(:badge).permit(:name, :external_description, :internal_description, :message, :filename, :points, :icon, :icon_inactive, :invertable, :secret)
+      params.require(:badge).permit(:name, :external_earned_description, :external_unearned_description, :internal_description, :message, :filename, :points, :icon, :icon_inactive, :invertable, :secret)
     end
 end
