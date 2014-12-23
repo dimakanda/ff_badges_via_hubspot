@@ -32,7 +32,7 @@ module FfBadges::UserConcern
 
       @@ff_badges_activated.each do |badge_filename|
         define_method("has_#{badge_filename}_badge?") do
-          self.badgable? && self.user_badges.where(badge_filename: badge_filename).present?
+          self.badgable? && self.user_badges.includes(:badge).where(badges: { filename: badge_filename }).present?
         end
       end
     end
@@ -66,7 +66,6 @@ module FfBadges::UserConcern
     user_badge = self.user_badges.build
     user_badge.skip_email = options[:skip_email]
     user_badge.badge_id = badge.id
-    user_badge.badge_filename = badge.filename
     user_badge.save
   end
 
