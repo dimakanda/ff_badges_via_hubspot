@@ -1,0 +1,12 @@
+<%= content_for :title do %>
+  <h1>Congratulations, you have earned <%= @badge.name -%> badge!</h1>
+<% end %>
+
+<p><%= image_tag @badge.icon.url(:big) %></p>
+<p><%= @badge.message %></p>
+
+<p>Thank you,</p>
+
+<p>The Write the World Team</p>
+
+<p>PS. It's our custom email view. Nice?</p>

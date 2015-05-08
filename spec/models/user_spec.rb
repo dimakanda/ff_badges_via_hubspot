@@ -219,7 +219,7 @@ describe User, :type => :model do
     end
 
     describe 'check_and_earn_all_badges!' do
-      it 'should assing user all badges when conditions are fulfilled' do
+      it 'should assign user all badges when conditions are fulfilled' do
         @user.check_and_earn_all_badges!
 
         expect(@user.badges).to match_array [@foobist]
