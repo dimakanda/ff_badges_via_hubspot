@@ -10,19 +10,29 @@ This project rocks and uses MIT-LICENSE.
     `gem 'ff_badges', git: 'git@bitbucket.org:firefield/ff_badges.git'`
 
 2. Copy migrations `rake railties:install:migrations` and migrate
+
 3. Include the users concern in your user model `include FfBadges::UserConcern` and in your ApplicationController `include Concerns::FfBadges::ShowEarnedBadges`
-4. Define a `badgeable_users` scope in your user model. For example: 
+
+4. Define a `badgeable_users` scope in your user model. For example:
 
     `scope :badgeable_users, -> { where.not confirmed_at: nil }`
 
 5. Add /extras folder to the loaded paths in your application.rb:
    `config.autoload_paths += %W(#{config.root}/lib #{config.root}/extras)`
+
 6. FFBadges require redis server. You need to start it, usually with: `redis-server`
+
+7. You can place your custom emails for new badges notifications inside `app/views/ff_badges/badges_mailer` name them `badge_earned_email.html.erb` and `badge_earned_email.text.erb`
+
+   You can find default views under `/app/views/ff_badges_mailer/badge_earned_email.html.erb` within the engine source.
 
 ### Badge earned modals ###
 1. Add `include Concerns::FfBadges::ShowEarnedBadges` to your `application_controller.rb`
+
 2. Add `//= require ff_badges` to your application.js
+
 3. Call `<%= notice_earned_badges %>` within the application template or any other that you want to use.
+
 4. You can create a partial at `extras/ff_badges/views/modal.html.erb` which will be used as a modal when user earns a badge. Default partial will be used otherwise.
 
 
