@@ -32,7 +32,7 @@ module FfBadges::UserConcern
 
       @@ff_badges_activated.each do |badge_filename|
         define_method("has_#{badge_filename}_badge?") do
-          self.badgable? && self.user_badges.includes(:badge).where(badges: { filename: badge_filename }).present?
+          self.badgable? && self.user_badges.includes(:badge).where(badges: { filename: badge_filename.to_s }).present?
         end
       end
     end
