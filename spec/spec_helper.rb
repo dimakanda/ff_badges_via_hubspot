@@ -6,7 +6,6 @@ require 'rspec/rails'
 require 'factory_girl_rails'
 require 'sorcery'
 require 'paperclip/matchers'
-require 'shoulda/matchers/integrations/rspec'
 
 require 'capybara/rails'
 require 'capybara/rspec'
@@ -31,6 +30,12 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   config.include Paperclip::Shoulda::Matchers
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 
   config.before do
     # disable all the observers

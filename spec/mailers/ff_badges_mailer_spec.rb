@@ -6,7 +6,7 @@ describe FfBadgesMailer, :type => :mailer do
       user = create :user
       badge = create :badge
 
-      mail = FfBadgesMailer.badge_earned_email(user, badge).deliver
+      mail = FfBadgesMailer.badge_earned_email(user, badge).deliver_now
 
       expect(mail.html_part.body.decoded).to include "you have earned #{badge.name} badge"
       expect(mail.html_part.body.decoded).to include badge.message
@@ -19,7 +19,7 @@ describe FfBadgesMailer, :type => :mailer do
       user = create :user
       badge = create :badge, name: 'Reviewer'
 
-      email = FfBadgesMailer.badge_earned_email(user, badge).deliver
+      email = FfBadgesMailer.badge_earned_email(user, badge).deliver_now
 
       raw_source = email.parts.first.body.raw_source
       expect(raw_source).to include("It's our custom email view")
@@ -30,7 +30,7 @@ describe FfBadgesMailer, :type => :mailer do
       badge = create :badge, name: 'Reviewer'
       allow_any_instance_of(FfBadgesMailer).to receive(:mail_template_path).and_return('ff_badges_mailer')
 
-      email =  FfBadgesMailer.badge_earned_email(user, badge).deliver
+      email =  FfBadgesMailer.badge_earned_email(user, badge).deliver_now
       raw_source = email.parts.first.body.raw_source
       expect(raw_source).not_to include("It's our custom email view")
       expect(raw_source).to include("Congratulations, you have earned")

@@ -34,7 +34,7 @@ describe UserBadge, :type => :model do
     expect(user.deserves_badge? badge).to eq true
 
     email = double 'email'
-    expect(email).to receive(:deliver)
+    expect(email).to receive(:deliver_now)
     expect(FfBadgesMailer).to receive(:badge_earned_email).and_return email
     user.earn_badge! badge
   end
