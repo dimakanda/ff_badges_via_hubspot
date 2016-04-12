@@ -15,7 +15,7 @@ class UserBadge < ActiveRecord::Base
   private
 
   def send_badge_email
-    FfBadgesMailer.badge_earned_email(user, badge).deliver unless skip_email
+    FfBadgesMailer.badge_earned_email(user, badge).deliver_now unless skip_email
   end
 
   def set_badge_in_redis
