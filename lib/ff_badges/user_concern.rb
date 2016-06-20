@@ -76,7 +76,7 @@ module FfBadges::UserConcern
   end
 
   def has_badge?(badge)
-    self.user_badges.where(badge_id: badge.id).first.present? if badgable?
+    badgable? && self.user_badges.where(badge_id: badge.id).any?
   end
 
   def check_and_earn_all_badges!
@@ -88,7 +88,7 @@ module FfBadges::UserConcern
   end
 
   def badgable?
-    !self.class.badgable_users_defined? || self.class.badgable_users.include?(self)
+    !self.class.badgable_users_defined? || self.class.badgable_users.where(id: self.id).any?
   end
 
   module ClassMethods
