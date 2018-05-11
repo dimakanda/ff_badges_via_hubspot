@@ -2,7 +2,11 @@ module FfBadges
   class Engine < ::Rails::Engine
 
     initializer :config_redis do
-      $redis = Redis.new(host: 'localhost', port: 6379)
+      if ENV['REDIS_URL']
+        $redis = Redis.new(url: ENV['REDIS_URL'])
+      else
+        $redis = Redis.new(host: 'localhost', port: 6379)
+      end
     end
 
     # adds a methods like deservers_xxxxx_badge? to User model
