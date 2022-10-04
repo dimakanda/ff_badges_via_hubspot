@@ -1,4 +1,5 @@
 class UserBadge < ActiveRecord::Base
+  require 'services/send_badge'
 
   belongs_to :user
   belongs_to :badge
@@ -36,7 +37,7 @@ class UserBadge < ActiveRecord::Base
   end
 
   def send_badge_email
-    FfBadgesMailer.badge_earned_email(user, badge).deliver_now unless skip_email
+    Services::SendBadge.send_badge_email(user, badge)
   end
 
   def set_badge_in_redis

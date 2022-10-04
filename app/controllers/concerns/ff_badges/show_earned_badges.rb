@@ -2,7 +2,7 @@ module Concerns::FfBadges::ShowEarnedBadges
   extend ActiveSupport::Concern
 
   included do
-    append_before_filter :show_earned_badges
+    append_before_action :show_earned_badges
   end
 
 

@@ -5,15 +5,23 @@ class FfBadgesMailer < ActionMailer::Base
 
   def badge_earned_email(user, badge)
     @user = user
-    if @user.badgable?
       @badge = badge
       @user_badge = UserBadge.where(user_id: @user, badge_id: @badge).first
-      mail(to: @user.email,
-           subject: "You have earned #{@badge.name} badge.") do |format|
-        format.html { render file: File.join(mail_template_path, 'badge_earned_email.html.erb') }
-        format.text { render file: File.join(mail_template_path, 'badge_earned_email.text.erb') }
-      end
-    end
+      auth = "Bearer " + ENV['HUBSPOT_ACCESS_TOKEN']
+      HTTParty.post("https://api.hubapi.com/email/public/v1/singleEmail/send", 
+                    :headers => { "Authorization" => auth, 'Content-Type' => 'application/json'},
+                    :body => {"emailId": "86843079695",
+                              "message": {"to": @user.email},
+                              "contactProperties": [
+                                                      {
+                                                        "name": "badgename",
+                                                        "value": @badge.name
+                                                      },
+                                                      {
+                                                        "name": "message",
+                                                        "value": @badge.message
+                                                      }
+                                                   ]})
   end
 
   private

@@ -1,7 +1,7 @@
 class Admin::AdminController < ApplicationController
   layout 'admin'
 
-  before_filter :require_login, :verify_admin
+  before_action :require_login, :verify_admin
 
   private
 

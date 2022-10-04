@@ -13,5 +13,4 @@ module FfBadgesHelper
       end
     end
   end
-
 end
