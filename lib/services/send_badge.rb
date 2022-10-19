@@ -8,18 +8,18 @@ module Services
       HTTParty.post("https://api.hubapi.com/email/public/v1/singleEmail/send", 
                     :headers => { "Authorization" => auth, 'Content-Type' => 'application/json'},
                     :body => {"emailId": "86843079695",
-                            "message": {"to": @user[:email], "from": "noreply@hubspot.com"},
+                            "message": {"to": @user[:email], "from": "support@writetheworld.com"},
                             "customProperties": [
                                                     {
-                                                        "name": "item_1",
+                                                        "name": "badge_name",
                                                         "value": @badge.name
                                                     },
                                                     {
-                                                        "name": "item_2",
+                                                        "name": "badge_message",
                                                         "value": @badge.message
                                                     },
                                                     {
-                                                        "name": "item_3",
+                                                        "name": "username",
                                                         "value": @user[:name]
                                                     },
 
